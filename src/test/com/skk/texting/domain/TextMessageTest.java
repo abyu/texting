@@ -60,4 +60,12 @@ public class TextMessageTest {
         Assert.assertThat(message, is(new TextMessage(messageText, person)));
     }
 
+    @Test
+    public void DisplayNameIsTheAddressWhenTheNameIsNotAvailable(){
+        TextMessage message = new TextMessage("Hello", new Person("", "1234354"));
+
+        Assert.assertThat(message.getDisplayName(), is("1234354"));
+
+    }
+
 }

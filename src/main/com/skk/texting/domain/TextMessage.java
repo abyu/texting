@@ -75,5 +75,13 @@ public class TextMessage {
     public Person getPerson() {
         return person;
     }
+
+    public String getDisplayName() {
+
+        String name = person.getName();
+        if(name == null || name.isEmpty())
+            return person.getAddress();
+        return name;
+    }
 }
 
