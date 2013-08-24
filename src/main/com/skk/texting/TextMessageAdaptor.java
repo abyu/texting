@@ -16,6 +16,7 @@ public class TextMessageAdaptor extends CursorAdapter {
 
     public TextMessageAdaptor(Context context, Cursor c, PersonFactory personFactory) {
         super(context, c, false);
+        this.personFactory = personFactory;
     }
 
     @Override
@@ -30,7 +31,6 @@ public class TextMessageAdaptor extends CursorAdapter {
         if(view == null) return;
         TextView contactName = (TextView)view.findViewById(R.id.contact_name);
 
-        personFactory = new PersonFactory(context.getContentResolver());
         TextMessage textMessage = TextMessage.fromCursor(cursor, personFactory);
         contactName.setText(textMessage.getDisplayName());
     }
