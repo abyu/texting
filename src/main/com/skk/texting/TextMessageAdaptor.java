@@ -12,8 +12,10 @@ import com.skk.texting.factory.PersonFactory;
 
 public class TextMessageAdaptor extends CursorAdapter {
 
-    public TextMessageAdaptor(Context context, Cursor c, boolean autoRequery) {
-        super(context, c, autoRequery);
+    private PersonFactory personFactory;
+
+    public TextMessageAdaptor(Context context, Cursor c, PersonFactory personFactory) {
+        super(context, c, false);
     }
 
     @Override
@@ -28,7 +30,8 @@ public class TextMessageAdaptor extends CursorAdapter {
         if(view == null) return;
         TextView contactName = (TextView)view.findViewById(R.id.contact_name);
 
-        TextMessage textMessage = TextMessage.fromCursor(cursor, new PersonFactory(context.getContentResolver()));
+        personFactory = new PersonFactory(context.getContentResolver());
+        TextMessage textMessage = TextMessage.fromCursor(cursor, personFactory);
         contactName.setText(textMessage.getDisplayName());
     }
 }
