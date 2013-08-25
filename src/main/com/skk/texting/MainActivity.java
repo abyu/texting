@@ -3,6 +3,7 @@ package com.skk.texting;
 import android.database.Cursor;
 import android.net.Uri;
 import android.widget.ListView;
+import com.skk.texting.constants.TextMessageConstants;
 import com.skk.texting.factory.PersonFactory;
 import com.skk.texting.listener.ListItemClickListener;
 import com.sony.smallapp.SmallApplication;
@@ -16,7 +17,8 @@ public class MainActivity extends SmallApplication {
         setContentView(R.layout.app_mian);
 
         ListView listView = (ListView)findViewById(R.id.messages);
-        Cursor smsContent = getContentResolver().query(Uri.parse("content://sms"), null, null, null, null);
+        String selection = TextMessageConstants.TYPE + " != " + TextMessageConstants.MessageType.DRAFT;
+        Cursor smsContent = getContentResolver().query(Uri.parse("content://sms"), null, selection, null, null);
         TextMessageAdaptor textMessageAdaptor = new TextMessageAdaptor(this, smsContent, new PersonFactory(getContentResolver()));
         new TextMessagesView(listView, textMessageAdaptor).setItemClickListener(new ListItemClickListener(this));
 
