@@ -4,14 +4,18 @@ import android.content.ContentResolver;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
+import com.google.inject.Inject;
 import com.skk.texting.domain.Person;
 
 public class PersonFactory {
     private ContentResolver contentResolver;
 
+    public PersonFactory(){
+
+    }
+
+    @Inject
     public PersonFactory(ContentResolver contentResolver) {
-
-
         this.contentResolver = contentResolver;
     }
 
