@@ -5,7 +5,7 @@ Texting android app built on Sony Small Apps SDK.
 
 Small app to send and recieve text messages.
 
-External Libraries used
+External Libraries used - Download all of these and put into libs folder in the project root
 --------------------------
 
 - guice-3.0-no_aop (Download from <https://github.com/roboguice/roboguice/wiki/InstallationNonMaven>)
