@@ -1,4 +1,4 @@
-package com.skk.texting;
+package com.skk.texting.di;
 
 import com.google.inject.Key;
 import com.sony.smallapp.SmallApplication;
