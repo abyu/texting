@@ -11,16 +11,17 @@ buildscript {
 apply plugin: 'android'
 
 android {
-  compileSdkVersion 17
+  compileSdkVersion "Sony:Sony Add-on SDK 1.0:16"
+  buildToolsVersion "18.0.1"
   sourceSets {
     main {
       manifest.srcFile 'AndroidManifest.xml'
-      java.srcDirs = ['src']
-      resources.srcDirs = ['src']
-      aidl.srcDirs = ['src']
-      renderscript.srcDirs = ['src']
+      java.srcDirs = ['src/main']
       res.srcDirs = ['res']
       assests.srcDirs = ['assets']  
+    }
+    test {
+      java.srcDirs = ['src/test']
     }
   }
 }
@@ -30,6 +31,6 @@ repositories {
 }
 
 dependencies {
- compile 'org.roboguice:roboguice:2.0'
+  compile 'org.roboguice:roboguice:3.0-alpha-1'
 }
 
