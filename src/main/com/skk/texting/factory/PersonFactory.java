@@ -10,10 +10,6 @@ import com.skk.texting.domain.Person;
 public class PersonFactory {
     private ContentResolver contentResolver;
 
-    public PersonFactory(){
-
-    }
-
     @Inject
     public PersonFactory(ContentResolver contentResolver) {
         this.contentResolver = contentResolver;
