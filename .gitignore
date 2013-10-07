@@ -22,6 +22,16 @@ local.properties
 # IntelliJ Project files
 workspace.xml
 tasks.xml
+.gradle/
+.idea/libraries/*
+.idea/codeStyleSettings.xml
 
-# Ignoring libs for now
-libs
+
+# No properties to be checkedin
+*.properties
+
+# Ignore vi swp files
+*.swp
+
+# Ignore all libs - they are downloaded from maven
+lib
