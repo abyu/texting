@@ -20,10 +20,18 @@ android {
       res.srcDirs = ['res']
       assests.srcDirs = ['assets']  
     }
-    test {
-      java.srcDirs = ['src/test']
-    }
   }
+}
+
+sourceSets {
+  unitTest {
+    java.srcDirs = ['src/test']
+  }
+}
+
+configurations {
+  unitTestCompile.extendsFrom runtime
+  unitTestRuntime.extendsFrom unitTestCompile
 }
 
 repositories {
@@ -32,5 +40,17 @@ repositories {
 
 dependencies {
   compile 'org.roboguice:roboguice:3.0-alpha-1'
+  unitTestCompile  files("$project.buildDir/classes/debug")
+  unitTestCompile 'junit:junit:4.11'
+  unitTestCompile 'com.google.android:android:4.1.1.4'
+  unitTestCompile 'com.google.android:android-test:4.1.1.4'
+  unitTestCompile 'org.mockito:mockito-all:1.9.5'
 }
 
+task unitTest(type:Test) {
+  description = "run unit tests"
+  testClassesDir = project.sourceSets.unitTest.output.classesDir
+  classpath = project.sourceSets.unitTest.runtimeClasspath
+}
+
+check.dependsOn unitTest
