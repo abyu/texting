@@ -8,6 +8,7 @@ import android.database.DataSetObserver;
 import android.net.Uri;
 import android.os.Bundle;
 
+@SuppressWarnings("deprecation") //Remove deprecated methods when it has been removed from parent interface
 public class MockCursor implements Cursor {
     @Override
     public int getCount() {
