@@ -5,14 +5,15 @@ Texting android app built on Sony Small Apps SDK.
 
 Small app to send and recieve text messages.
 
-External Libraries used - Download all of these and put into libs folder in the project root
---------------------------
+Tool used:
+---------------
 
-- guice-3.0-no_aop (Download from <https://github.com/roboguice/roboguice/wiki/InstallationNonMaven>)
-- hamcrest-core-1.3 (Download from <https://github.com/junit-team/junit/wiki/Download-and-Install>)
-- javax.inject-1 (Download from <https://github.com/roboguice/roboguice/wiki/InstallationNonMaven>)
-- junit-4.11 (Download from <https://github.com/junit-team/junit/wiki/Download-and-Install>) 
-- mockito-all-1.9.5 (Download from <https://code.google.com/p/mockito/>)
-- roboguice-x.x (any version greater than/equal to 2.0)(Download from <https://github.com/roboguice/roboguice/wiki/InstallationNonMaven>)
- 
+1. IntelliJIdea Community edition(v~12.1.5)
+2. Gradle v1.7
 
+
+Command line Build Targets:
+----------------------------
+
+- `gradle build` will compile, test and generate apks
+- use `gradle tasks` to get a list of available targets
