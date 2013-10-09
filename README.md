@@ -1,6 +1,6 @@
 Texting
 =========
-![Build Status](https://travis-ci.org/abyu/texting.png)](https://travis-ci.org/abyu/texting)
+[![Build Status](https://travis-ci.org/abyu/texting.png)](https://travis-ci.org/abyu/texting)
 
 Texting android app built on Sony Small Apps SDK.
 
