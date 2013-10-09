@@ -6,7 +6,7 @@ Texting android app built on Sony Small Apps SDK.
 
 Small app to send and recieve text messages.
 
-Tool used:
+Tools used:
 ---------------
 
 1. IntelliJIdea Community edition(v~12.1.5)
