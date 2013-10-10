@@ -9,7 +9,7 @@ before_install:
 - export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
 - android update sdk --filter platform-tools,android-16,extra-android-support,android-17,sysimg-17 --no-ui --force
 - wget http://texting-tools.googlecode.com/svn/trunk/sony_add-on_sdk_2_0.zip
-- tar -xzf sony_add-on_sdk_2_0.zip
+- tar -xf sony_add-on_sdk_2_0.zip
 - mv sony_add-on_sdk_2_0 $ANDROID_HOME/add-ons/
 
 
