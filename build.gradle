@@ -11,7 +11,7 @@ buildscript {
 apply plugin: 'android'
 
 android {
-  compileSdkVersion "Sony:Sony Add-on SDK 1.0:16"
+  compileSdkVersion "Sony:Sony Add-on SDK 2.0:16"
   buildToolsVersion "18.0.1"
   sourceSets {
     main {
