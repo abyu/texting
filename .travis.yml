@@ -11,5 +11,8 @@ before_install:
 - wget http://texting-tools.googlecode.com/svn/trunk/sony_add-on_sdk_2_0.tar.gz
 - tar -xzf sony_add-on_sdk_2_0.tar.gz
 - mv sony_add-on_sdk_2_0 $ANDROID_HOME/add-ons/
-
+- wget https://dl-ssl.google.com/android/repository/build-tools_r18.0.1-linux.zip
+- unzip build-tools_r18.0.1-linux.zip
+- mkdir -p $ANDROID_HOME/build-tools
+- mv android-4.3 $ANDROID_HOME/build-tool/18.0.1
 
