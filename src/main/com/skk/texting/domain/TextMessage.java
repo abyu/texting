@@ -9,9 +9,16 @@ public class TextMessage {
     private String messageText;
     private Person person;
 
-    public TextMessage(String messageText, Person person) {
+    public void setThreadId(String threadId) {
+        this.threadId = threadId;
+    }
+
+    private String threadId;
+
+    public TextMessage(String messageText, Person person, String threadId) {
         this.messageText = messageText;
         this.person = person;
+        this.threadId = threadId;
     }
 
     public TextMessage() {}
@@ -22,6 +29,9 @@ public class TextMessage {
 
         String message = cursor.getString(cursor.getColumnIndex(TextMessageConstants.MESSAGE_TEXT));
         textMessage.setMessageText(message);
+
+        String threadId = cursor.getString(cursor.getColumnIndex(TextMessageConstants.THREAD_ID));
+        textMessage.setThreadId(threadId);
 
         String address = cursor.getString(cursor.getColumnIndex(TextMessageConstants.ADDRESS));
         Person person = personFactory.fromAddress(address);
@@ -82,6 +92,14 @@ public class TextMessage {
         if(name == null || name.isEmpty())
             return person.getAddress();
         return name;
+    }
+
+    public String Address() {
+        return person.getAddress();
+    }
+
+    public String getThreadId() {
+        return threadId;
     }
 }
 
