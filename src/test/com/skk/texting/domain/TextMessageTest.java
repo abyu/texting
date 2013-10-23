@@ -31,6 +31,7 @@ public class TextMessageTest {
     public void TextMessageIsCreatedFromTheGivenCursor() {
         final String messageText = "Hello";
         final String address = "12345546";
+        final String threadId = "2";
         Person person = new Person("myname", address);
 
         cursor = new MockCursor() {
@@ -40,6 +41,8 @@ public class TextMessageTest {
                     return messageText;
                 if (columnIndex == 0)
                     return address;
+                if (columnIndex == 2)
+                    return threadId;
                 return "";
             }
 
@@ -49,6 +52,8 @@ public class TextMessageTest {
                     return 1;
                 if (s.equals(TextMessageConstants.ADDRESS))
                     return 0;
+                if (s.equals(TextMessageConstants.THREAD_ID))
+                    return 2;
                 return -1;
 
             }
@@ -57,12 +62,12 @@ public class TextMessageTest {
         when(personFactory.fromAddress(address)).thenReturn(person);
         TextMessage message = TextMessage.fromCursor(cursor, personFactory);
 
-        Assert.assertThat(message, is(new TextMessage(messageText, person)));
+        Assert.assertThat(message, is(new TextMessage(messageText, person, threadId)));
     }
 
     @Test
     public void AddressIsUsedAsADisplayNameWhenNoNameIsNotAvailable(){
-        TextMessage message = new TextMessage("Hello", new Person("", "1234354"));
+        TextMessage message = new TextMessage("Hello", new Person("", "1234354"), "2");
 
         Assert.assertThat(message.getDisplayName(), is("1234354"));
 
