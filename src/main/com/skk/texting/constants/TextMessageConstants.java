@@ -30,6 +30,8 @@ public class TextMessageConstants {
         public static String OUTBOX = "4";
         public static String FAILED = "5"; // for failed outgoing messages
         public static String QUEUED = "6";
+
+
     }
 
 }
