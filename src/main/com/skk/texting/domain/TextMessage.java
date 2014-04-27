@@ -8,6 +8,7 @@ public class TextMessage {
 
     private String messageText;
     private Person person;
+    private String messageType;
 
     public void setThreadId(String threadId) {
         this.threadId = threadId;
@@ -36,6 +37,9 @@ public class TextMessage {
         String address = cursor.getString(cursor.getColumnIndex(TextMessageConstants.ADDRESS));
         Person person = personFactory.fromAddress(address);
         textMessage.setPerson(person);
+
+        String messageType = cursor.getString(cursor.getColumnIndex(TextMessageConstants.TYPE));
+        textMessage.setMessageType(messageType);
 
         return textMessage;
     }
@@ -68,8 +72,6 @@ public class TextMessage {
         return result;
     }
 
-
-
     @Override
     public String toString() {
         return "TextMessage{" +
@@ -100,6 +102,18 @@ public class TextMessage {
 
     public String getThreadId() {
         return threadId;
+    }
+
+    public void setMessageType(String messageType) {
+        this.messageType = messageType;
+    }
+
+    public String getMessageType() {
+        return messageType;
+    }
+
+    public boolean IsSent() {
+        return messageType.equals(TextMessageConstants.MessageType.SENT);
     }
 }
 

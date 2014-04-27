@@ -7,14 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
-import com.skk.texting.domain.Conversation;
 import com.skk.texting.domain.TextMessage;
 import com.skk.texting.factory.PersonFactory;
 
 public class TextMessageAdaptor extends CursorAdapter {
 
     private PersonFactory personFactory;
-    private Conversation converstion;
 
     public TextMessageAdaptor(Context context, Cursor c, PersonFactory personFactory) {
         super(context, c, false);
@@ -35,11 +33,7 @@ public class TextMessageAdaptor extends CursorAdapter {
         TextView contactName = (TextView)view.findViewById(R.id.contact_name);
 
         TextMessage textMessage = TextMessage.fromCursor(cursor, personFactory);
-        converstion.loadConversations(textMessage.getThreadId());
         contactName.setText(textMessage.getDisplayName());
     }
-
-    public void setConversation(Conversation converstion) {
-        this.converstion = converstion;
-    }
 }
+
