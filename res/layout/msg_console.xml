@@ -5,13 +5,12 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="#FFFFFF"
-              android:animateLayoutChanges="true"
-    >
+              android:animateLayoutChanges="true">
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="< Back"
+        android:text="&lt; Back"
         android:id="@+id/textView"
         android:gravity="top"
         android:layout_gravity="top"/>
@@ -20,7 +19,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/listView"
-        android:layout_gravity="center"
-       />
+        android:layout_gravity="center"/>
 
 </LinearLayout>
