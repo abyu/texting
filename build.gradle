@@ -4,15 +4,15 @@ buildscript {
   }
 
   dependencies {
-    classpath 'com.android.tools.build:gradle:0.5.6'
+    classpath 'com.android.tools.build:gradle:0.8.+'
   }
 }
 
 apply plugin: 'android'
 
 android {
-  compileSdkVersion "Sony:Sony Add-on SDK 2.0:16"
-  buildToolsVersion "18.0.1"
+  compileSdkVersion "Sony:Sony Add-on SDK 2.1:16"
+  buildToolsVersion "19.0.3"
   sourceSets {
     main {
       manifest.srcFile 'AndroidManifest.xml'

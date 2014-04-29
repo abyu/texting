@@ -8,11 +8,11 @@ before_install:
 - export ANDROID_HOME=~/build/abyu/texting/android-sdk-linux
 - export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
 - ( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) |android update sdk --filter platform-tools,android-16,extra-android-support,android-17,sysimg-17 --no-ui --force
-- wget http://texting-tools.googlecode.com/svn/trunk/sony_add-on_sdk_2_0.tar.gz
-- tar -xzf sony_add-on_sdk_2_0.tar.gz
-- mv sony_add-on_sdk_2_0 $ANDROID_HOME/add-ons/
-- wget https://dl-ssl.google.com/android/repository/build-tools_r18.0.1-linux.zip
-- unzip build-tools_r18.0.1-linux.zip
+- wget http://texting-tools.googlecode.com/svn/trunk/addon-sony_add-on_sdk_2_1-sony-16.tar.gz
+- tar -xzf addon-sony_add-on_sdk_2_1-sony-16.tar.gz
+- mv addon-sony_add-on_sdk_2_1-sony-16 $ANDROID_HOME/add-ons/
+- wget https://dl-ssl.google.com/android/repository/build-tools_r19.0.3-linux.zip
+- unzip build-tools_r19.0.3-linux.zip
 - mkdir -p $ANDROID_HOME/build-tools
-- mv android-4.3 $ANDROID_HOME/build-tools/18.0.1
+- mv android-4.3 $ANDROID_HOME/build-tools/19.0.3
 - gradle -v
