@@ -15,4 +15,4 @@ before_install:
 - unzip build-tools_r18.0.1-linux.zip
 - mkdir -p $ANDROID_HOME/build-tools
 - mv android-4.3 $ANDROID_HOME/build-tools/18.0.1
-
+- gradle -v
