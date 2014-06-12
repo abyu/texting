@@ -3,7 +3,6 @@ package com.skk.texting;
 import android.database.Cursor;
 import android.net.Uri;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -39,13 +38,13 @@ public class ApplicationStart extends RoboSmallApplication {
         LayoutInflater layoutInflater = LayoutInflater.from(this);
         View messageConsole = layoutInflater.inflate(R.layout.msg_console, null);
 
-        messageConsole.setOnTouchListener(new View.OnTouchListener() {
+        messageConsole.setOnTouchListener(new OnSwipeGestureHandler(this) {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public void onSwipeRight() {
                 Toast.makeText(getApplicationContext(), "Hello", Toast.LENGTH_LONG).show();
                 viewFlipper.setDisplayedChild(0);
-                return true;
             }
+
         });
 
         viewFlipper.addView(messageConsole);
