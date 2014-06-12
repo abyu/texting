@@ -34,8 +34,6 @@ public class ApplicationStart extends RoboSmallApplication {
         new TextMessagesView(messagesListView, textMessageAdaptor).setItemClickListener(itemClickListener);
     }
 
-
-
     private ViewFlipper viewFlipper(){
         final ViewFlipper viewFlipper = (ViewFlipper) findViewById(R.id.viewFlipper);
         LayoutInflater layoutInflater = LayoutInflater.from(this);
