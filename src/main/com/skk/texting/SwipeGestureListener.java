@@ -1,5 +1,6 @@
 package com.skk.texting;
 
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
@@ -22,6 +23,7 @@ public class SwipeGestureListener extends GestureDetector.SimpleOnGestureListene
         Direction swipeDirection = horizontalDirection(e1, e2);
         swipeDirection = swipeDirection.equals(Direction.None) ? verticalDirection(e1, e2) : swipeDirection;
 
+        Log.d("TEXTING:", "fliging" + swipeDirection.toString());
         switch (swipeDirection){
             case Right:
                 handler.onSwipeRight();break;

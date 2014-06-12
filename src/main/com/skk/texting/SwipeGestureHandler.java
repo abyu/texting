@@ -7,3 +7,6 @@ public interface SwipeGestureHandler {
     public void onSwipeDown();
 
 }
+
+
+
