@@ -15,23 +15,27 @@ public class OnSwipeGestureHandler implements SwipeGestureHandler, View.OnTouchL
     }
 
     @Override
-    public void onSwipeLeft() {
+    public boolean onSwipeLeft() {
 
+        return false;
     }
 
     @Override
-    public void onSwipeRight() {
+    public boolean onSwipeRight() {
 
+        return false;
     }
 
     @Override
-    public void onSwipeUp() {
+    public boolean onSwipeUp() {
 
+        return false;
     }
 
     @Override
-    public void onSwipeDown() {
+    public boolean onSwipeDown() {
 
+        return false;
     }
 
     @Override

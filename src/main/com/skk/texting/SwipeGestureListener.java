@@ -1,12 +1,12 @@
 package com.skk.texting;
 
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
 public class SwipeGestureListener extends GestureDetector.SimpleOnGestureListener {
     private static final float THRESHOLD_DISTANCE = 100;
     private SwipeGestureHandler handler;
+    protected MotionEvent lastDownEvent = null;
 
     public SwipeGestureListener(SwipeGestureHandler handler) {
         this.handler = handler;
@@ -14,27 +14,30 @@ public class SwipeGestureListener extends GestureDetector.SimpleOnGestureListene
 
     @Override
     public boolean onDown(MotionEvent e) {
+        lastDownEvent = e;
         return true;
     }
 
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         //Determining left or right is more important for this application as up and down are anyways ignored
+        e1 = (e1 == null)? lastDownEvent : e1;
+        e1 = (e1 == null)? MotionEventRecorder.replayEvent(0) : e1;
+
         Direction swipeDirection = horizontalDirection(e1, e2);
         swipeDirection = swipeDirection.equals(Direction.None) ? verticalDirection(e1, e2) : swipeDirection;
 
-        Log.d("TEXTING:", "fliging" + swipeDirection.toString());
         switch (swipeDirection){
             case Right:
-                handler.onSwipeRight();break;
+                return handler.onSwipeRight();
             case Left:
-                handler.onSwipeLeft();break;
+                return handler.onSwipeLeft();
             case Up:
-                handler.onSwipeUp();break;
+                return handler.onSwipeUp();
             case Down:
-                handler.onSwipeDown();break;
+                return handler.onSwipeDown();
         }
-        return true;
+        return false;
     }
 
     private Direction horizontalDirection(MotionEvent start, MotionEvent end) {

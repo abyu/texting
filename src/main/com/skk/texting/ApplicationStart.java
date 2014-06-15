@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.Toast;
 import android.widget.ViewFlipper;
 import com.google.inject.Inject;
 import com.skk.texting.di.RoboSmallApplication;
@@ -30,25 +29,31 @@ public class ApplicationStart extends RoboSmallApplication {
         TextMessageAdaptor textMessageAdaptor = new TextMessageAdaptor(this, smsContent, personFactory);
 
         itemClickListener.setViewFlipper(viewFlipper());
+
         new TextMessagesView(messagesListView, textMessageAdaptor).setItemClickListener(itemClickListener);
     }
+
 
     private ViewFlipper viewFlipper(){
         final ViewFlipper viewFlipper = (ViewFlipper) findViewById(R.id.viewFlipper);
         LayoutInflater layoutInflater = LayoutInflater.from(this);
         View messageConsole = layoutInflater.inflate(R.layout.msg_console, null);
 
-        messageConsole.setOnTouchListener(new OnSwipeGestureHandler(this) {
+        OnSwipeGestureHandler swipeListener = new OnSwipeGestureHandler(this) {
             @Override
-            public void onSwipeRight() {
-                Toast.makeText(getApplicationContext(), "Hello", Toast.LENGTH_LONG).show();
+            public boolean onSwipeRight() {
                 viewFlipper.setDisplayedChild(0);
+                return true;
             }
 
-        });
+        };
+        messageConsole.setOnTouchListener(swipeListener);
 
         viewFlipper.addView(messageConsole);
 
         return  viewFlipper;
     }
+
+
 }
+
