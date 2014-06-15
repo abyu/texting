@@ -1,10 +1,10 @@
 package com.skk.texting;
 
 public interface SwipeGestureHandler {
-    public void onSwipeLeft();
-    public void onSwipeRight();
-    public void onSwipeUp();
-    public void onSwipeDown();
+    public boolean onSwipeLeft();
+    public boolean onSwipeRight();
+    public boolean onSwipeUp();
+    public boolean onSwipeDown();
 
 }
 
