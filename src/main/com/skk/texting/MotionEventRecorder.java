@@ -10,7 +10,7 @@ public class MotionEventRecorder {
 
     public static void recordEvent(MotionEvent event, int id){
 
-        MotionEvent newEvent = event.obtain(event);
+        MotionEvent newEvent = MotionEvent.obtain(event);
         recordedEvents.put(id, newEvent);
     }
 
