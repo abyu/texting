@@ -40,10 +40,17 @@ public class ApplicationStart extends RoboSmallApplication {
         LayoutInflater layoutInflater = LayoutInflater.from(this);
         View messageConsole = layoutInflater.inflate(R.layout.msg_console, null);
 
+        viewFlipper.setInAnimation(this, R.anim.slide_in_right);
+        viewFlipper.setOutAnimation(this, R.anim.slide_out_left);
+        final ApplicationStart applicationContext = this;
         OnSwipeGestureHandler swipeListener = new OnSwipeGestureHandler(this) {
             @Override
             public boolean onSwipeRight() {
+                viewFlipper.setInAnimation(applicationContext, R.anim.slide_in_left);
+                viewFlipper.setOutAnimation(applicationContext, R.anim.slide_out_right);
                 viewFlipper.setDisplayedChild(0);
+                viewFlipper.setInAnimation(applicationContext, R.anim.slide_in_right);
+                viewFlipper.setOutAnimation(applicationContext, R.anim.slide_out_left);
                 return true;
             }
 
