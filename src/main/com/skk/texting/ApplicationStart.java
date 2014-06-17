@@ -10,6 +10,7 @@ import com.google.inject.Inject;
 import com.skk.texting.di.RoboSmallApplication;
 import com.skk.texting.factory.PersonFactory;
 import com.skk.texting.listener.ListItemClickListener;
+import com.skk.texting.listener.OnSwipeGestureHandler;
 
 
 public class ApplicationStart extends RoboSmallApplication {
