@@ -13,7 +13,7 @@
             android:textColor="@android:color/black"
             android:textSize="10pt"
             android:gravity="center"
-        android:text="asfsafsaf saf asfd asf asf as">
+        >
     </TextView>
     <ImageView
         android:layout_width="fill_parent"
