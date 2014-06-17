@@ -1,4 +1,4 @@
-package com.skk.texting;
+package com.skk.texting.listener;
 
 import android.content.Context;
 import android.view.GestureDetector;

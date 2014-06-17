@@ -6,7 +6,7 @@
                 android:background="@android:color/white"
                 style="@android:style/Theme.NoTitleBar">
 
-    <com.skk.texting.CustomViewFlipper
+    <ViewFlipper
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/viewFlipper"
@@ -17,6 +17,6 @@
                   android:id="@+id/messages">
 
         </ListView>
-    </com.skk.texting.CustomViewFlipper>
+    </ViewFlipper>
 
 </RelativeLayout>

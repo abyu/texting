@@ -43,7 +43,6 @@ public class MotionEventRecorderTest {
 
     @Test
     public void replayOfAnEventWillRemoveEventFromRecordedCache(){
-
         MotionEvent motionEvent = PowerMockito.mock(MotionEvent.class);
         mockStatic(MotionEvent.class);
         when(MotionEvent.obtain(any(MotionEvent.class))).thenReturn(motionEvent);

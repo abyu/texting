@@ -18,4 +18,9 @@ public class MotionEventRecorder {
         MotionEvent remove = recordedEvents.remove(id);
         return remove;
     }
+
+    public static MotionEvent peekEvent(int id){
+       return recordedEvents.get(id);
+    }
+
 }
