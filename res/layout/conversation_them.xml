@@ -8,20 +8,10 @@
                                                android:animateLayoutChanges="true">
     <TextView
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
         android:id="@+id/recv_text"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="@android:color/white"
-              android:scrollbars="vertical"
-              android:maxLines="5"
-        android:text="Ipsom loremIpsom loremIpsom loremIpsom loremIpsom loremIpsom loremIpsom loremIpsom loremIpsom loremIpsom loremIpsom lorem"
-        android:clickable="true"
-        android:textColor="@android:color/black"
         android:gravity="right"
-        android:textIsSelectable="true"
-        android:padding="5dp"
-        />
+        style="@style/text_normal"
+    />
     <ImageView
         android:layout_width="fill_parent"
         android:layout_height="0.7dp"

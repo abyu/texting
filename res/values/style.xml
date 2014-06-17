@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="text_normal">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:textIsSelectable">true</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:maxLines">5</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:fontFamily"></item>
+    </style>
+</resources>
