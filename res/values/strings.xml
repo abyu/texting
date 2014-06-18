@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Texting</string>
+    <string name="app_name">Texts</string>
+    <string name="version_code">2</string>
+    <string name="version">1.0.0</string>
 </resources>
