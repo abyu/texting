@@ -23,9 +23,9 @@ Creating a Signed APK
 ----------------------
 
 1. Create a gradle properties file with the following properties
-    RELEASE_KEYSTORE_FILE='path to your keystore'
-    RELEASE_KEYSTORE_PASSWORD='your keystore password'
-    RELEASE_KEY_ALIAS='your key alias'
-    RELEASE_KEY_PASSWORD='your key password'
+    - RELEASE_KEYSTORE_FILE='path to your keystore'
+    - RELEASE_KEYSTORE_PASSWORD='your keystore password'
+    - RELEASE_KEY_ALIAS='your key alias'
+    - RELEASE_KEY_PASSWORD='your key password'
 2. Run `gradle build` or `gradle assembleSigned`
 3. The signed apk is available in build/apk/Texting-Signed.apk
