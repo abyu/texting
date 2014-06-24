@@ -26,6 +26,8 @@ tasks.xml
 .idea/libraries/*
 .idea/codeStyleSettings.xml
 
+# keystore
+*.keystore
 
 # No properties to be checkedin
 *.properties
