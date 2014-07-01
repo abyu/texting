@@ -35,7 +35,7 @@ public class ConversationRepository {
 
     public Cursor getCusor(String threadId){
         String selection = TextMessageConstants.THREAD_ID + " = '" + threadId +"'";
-        Cursor result = contentResolver.query(Uri.parse("content://sms"), null, selection, null, null);
+        Cursor result = contentResolver.query(Uri.parse("content://sms"), null, selection, null, "date ASC");
 
         return result;
     }

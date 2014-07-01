@@ -191,6 +191,11 @@ public class MockCursor implements Cursor {
     }
 
     @Override
+    public Uri getNotificationUri() {
+        return null;
+    }
+
+    @Override
     public boolean getWantsAllOnMoveCalls() {
         return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
