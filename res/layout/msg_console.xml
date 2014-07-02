@@ -14,7 +14,26 @@
         android:layout_gravity="center"
         android:stackFromBottom="true"
         android:transcriptMode="alwaysScroll"
+        android:layout_weight="1"
 
             />
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:text="reply"
+        android:textSize="10dp"/>
+    <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:text="blah"
+              android:inputType="textMultiLine"
+              android:textColor="@android:color/black"
+              android:minLines="3"
+              android:maxLines="3"
+              android:scrollbars="vertical"
+              android:gravity="top|left"
+              android:background="@drawable/input_text_border"
+        android:layout_margin="2dp"
+        android:padding="4dp"
+        
+          />
 
 </com.skk.texting.customview.CustomLinearLayout>

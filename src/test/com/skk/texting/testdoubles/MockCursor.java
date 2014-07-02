@@ -190,7 +190,7 @@ public class MockCursor implements Cursor {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
-   
+
     public Uri getNotificationUri() {
         return null;
     }
