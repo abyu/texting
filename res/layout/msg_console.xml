@@ -21,9 +21,9 @@
         android:minLines="3"
         android:padding="4dp"
         android:scrollbars="vertical"
-        android:text="blah"
         android:textColor="@android:color/black"
         android:visibility="gone"
+        android:maxLength="160"
         android:layout_alignParentBottom="true"
         />
 

@@ -59,6 +59,13 @@ public class ApplicationStart extends RoboSmallApplication {
         };
         messageConsole.setOnTouchListener(swipeListener);
 
+        attachReplyButtonHandler(messageConsole);
+        viewFlipper.addView(messageConsole);
+
+        return  viewFlipper;
+    }
+
+    private void attachReplyButtonHandler(View messageConsole) {
         final Button replyButton = (Button) messageConsole.findViewById(R.id.reply);
         final EditText replyText = (EditText) messageConsole.findViewById(R.id.reply_text);
         final Animation slideInUp = AnimationUtils.loadAnimation(this, R.anim.slide_in_up);
@@ -76,9 +83,6 @@ public class ApplicationStart extends RoboSmallApplication {
                 }
             }
         });
-        viewFlipper.addView(messageConsole);
-
-        return  viewFlipper;
     }
 
 
