@@ -20,12 +20,12 @@ import static org.powermock.api.support.membermodification.MemberModifier.suppre
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({LinearLayout.class, MotionEvent.class})
-public class CustomLinearLayoutTest {
+public class CustomRelativeLayoutTest {
 
     @Test
     public void recordAnyActionDownEventDuringATouchEvent(){
         suppress(method(LinearLayout.class, "onInterceptTouchEvent"));
-        CustomLinearLayout customLinearLayout = Whitebox.newInstance(CustomLinearLayout.class);
+        CustomRelativeLayout customRelativeLayout = Whitebox.newInstance(CustomRelativeLayout.class);
         MotionEvent motionEventDown = PowerMockito.mock(MotionEvent.class);
 
         mockStatic(MotionEvent.class);
@@ -34,7 +34,7 @@ public class CustomLinearLayoutTest {
         when(motionEventDown.getX()).thenReturn(126f);
         when(motionEventDown.getY()).thenReturn(232f);
 
-        customLinearLayout.onInterceptTouchEvent(motionEventDown);
+        customRelativeLayout.onInterceptTouchEvent(motionEventDown);
 
         Assert.assertThat(MotionEventRecorder.peekEvent(0), Is.is(motionEventDown));
     }
@@ -42,7 +42,7 @@ public class CustomLinearLayoutTest {
     @Test
     public void doNotPropagateTouchEventsToChildWhenItIsPossibleFling(){
         suppress(method(LinearLayout.class, "onInterceptTouchEvent"));
-        CustomLinearLayout customLinearLayout = Whitebox.newInstance(CustomLinearLayout.class);
+        CustomRelativeLayout customRelativeLayout = Whitebox.newInstance(CustomRelativeLayout.class);
         MotionEvent motionEventDown = PowerMockito.mock(MotionEvent.class);
         MotionEvent motionEventMove = PowerMockito.mock(MotionEvent.class);
 
@@ -56,9 +56,9 @@ public class CustomLinearLayoutTest {
         when(motionEventDown.getX()).thenReturn(256f);
         when(motionEventMove.getY()).thenReturn(240f);
 
-        customLinearLayout.onInterceptTouchEvent(motionEventDown);
+        customRelativeLayout.onInterceptTouchEvent(motionEventDown);
 
         //A return value of true means, the event has been consumed here and was not propagated down.
-        Assert.assertThat(customLinearLayout.onInterceptTouchEvent(motionEventMove), Is.is(true));
+        Assert.assertThat(customRelativeLayout.onInterceptTouchEvent(motionEventMove), Is.is(true));
     }
 }

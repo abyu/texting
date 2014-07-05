@@ -1,28 +1,31 @@
 package com.skk.texting.customview;
 
+import android.animation.LayoutTransition;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import com.skk.texting.MotionEventRecorder;
 
-public class CustomLinearLayout extends LinearLayout {
+public class CustomRelativeLayout extends RelativeLayout {
 
     private MotionEvent previousEvent;
 
-    public CustomLinearLayout(Context context) {
+    public CustomRelativeLayout(Context context) {
         super(context);
     }
 
-    public CustomLinearLayout(Context context, AttributeSet attrs) {
+    public CustomRelativeLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public CustomLinearLayout(Context context, AttributeSet attrs, int defStyle) {
+    public CustomRelativeLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 
-    public CustomLinearLayout(){
+    public CustomRelativeLayout(){
       super(null);
     }
 
@@ -34,6 +37,12 @@ public class CustomLinearLayout extends LinearLayout {
         }
 
         return isAPossibleFling(previousEvent, ev) || super.onInterceptTouchEvent(ev);
+    }
+
+    @Override
+    public void setLayoutTransition(LayoutTransition transition) {
+        transition.setDuration(200);
+        super.setLayoutTransition(transition);
     }
 
     private boolean isAPossibleFling(MotionEvent previousEvent, MotionEvent ev) {

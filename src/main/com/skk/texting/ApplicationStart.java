@@ -2,10 +2,12 @@ package com.skk.texting;
 
 import android.database.Cursor;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ListView;
-import android.widget.ViewFlipper;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.*;
 import com.google.inject.Inject;
 import com.skk.texting.di.RoboSmallApplication;
 import com.skk.texting.factory.PersonFactory;
@@ -38,7 +40,7 @@ public class ApplicationStart extends RoboSmallApplication {
     private ViewFlipper viewFlipper(){
         final ViewFlipper viewFlipper = (ViewFlipper) findViewById(R.id.viewFlipper);
         LayoutInflater layoutInflater = LayoutInflater.from(this);
-        View messageConsole = layoutInflater.inflate(R.layout.msg_console, null);
+        final View messageConsole = layoutInflater.inflate(R.layout.msg_console, null);
 
         viewFlipper.setInAnimation(this, R.anim.slide_in_right);
         viewFlipper.setOutAnimation(this, R.anim.slide_out_left);
@@ -57,6 +59,23 @@ public class ApplicationStart extends RoboSmallApplication {
         };
         messageConsole.setOnTouchListener(swipeListener);
 
+        final Button replyButton = (Button) messageConsole.findViewById(R.id.reply);
+        final EditText replyText = (EditText) messageConsole.findViewById(R.id.reply_text);
+        final Animation slideInUp = AnimationUtils.loadAnimation(this, R.anim.slide_in_up);
+        final Animation slideOutDown = AnimationUtils.loadAnimation(this, R.anim.slide_out_down);
+        replyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(replyText.getVisibility() == View.VISIBLE) {
+                    replyText.startAnimation(slideOutDown);
+                    replyText.setVisibility(View.GONE);
+                }
+                else{
+                    replyText.startAnimation(slideInUp);
+                    replyText.setVisibility(View.VISIBLE);
+                }
+            }
+        });
         viewFlipper.addView(messageConsole);
 
         return  viewFlipper;

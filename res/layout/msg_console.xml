@@ -1,39 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<com.skk.texting.customview.CustomLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="#FFFFFF"
-              android:animateLayoutChanges="true">
+<com.skk.texting.customview.CustomRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                               android:layout_width="match_parent"
+                                               android:layout_height="match_parent"
+                                               android:animateLayoutChanges="true"
 
-    <ListView
+                                               android:background="#FFFFFF"
+                                               android:orientation="vertical"
+    android:gravity="bottom">
+
+    <EditText
+        android:id="@+id/reply_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/listView"
-        android:layout_gravity="center"
-        android:stackFromBottom="true"
-        android:transcriptMode="alwaysScroll"
-        android:layout_weight="1"
-
-            />
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="30dp"
-        android:text="reply"
-        android:textSize="10dp"/>
-    <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
-              android:text="blah"
-              android:inputType="textMultiLine"
-              android:textColor="@android:color/black"
-              android:minLines="3"
-              android:maxLines="3"
-              android:scrollbars="vertical"
-              android:gravity="top|left"
-              android:background="@drawable/input_text_border"
         android:layout_margin="2dp"
+        android:background="@drawable/input_text_border"
+        android:gravity="top|left"
+        android:inputType="textMultiLine"
+        android:maxLines="3"
+        android:minLines="3"
         android:padding="4dp"
-        
-          />
+        android:scrollbars="vertical"
+        android:text="blah"
+        android:textColor="@android:color/black"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        />
 
-</com.skk.texting.customview.CustomLinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:animateLayoutChanges="true"
+        android:id="@+id/msg_content"
+        android:layout_above="@id/reply_text"
+        >
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:stackFromBottom="true"
+            android:transcriptMode="alwaysScroll"
+            android:layout_weight="1"
+            />
+
+        <Button
+            android:id="@+id/reply"
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:text="reply"
+            android:textSize="10dp"
+            />
+    </LinearLayout>
+
+</com.skk.texting.customview.CustomRelativeLayout>
