@@ -46,14 +46,26 @@
             android:transcriptMode="alwaysScroll"
             android:layout_weight="1"
             />
-
-        <Button
-            android:id="@+id/reply"
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="30dp"
-            android:text="reply"
-            android:textSize="10dp"
-            />
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/reply"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="reply"
+                android:textSize="10dp"
+                />
+            <Button
+                android:id="@+id/add_reply"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:text="Up"
+                android:textSize="10dp"/>
+        </LinearLayout>
+
     </LinearLayout>
 
 </com.skk.texting.customview.CustomRelativeLayout>

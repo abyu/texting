@@ -7,10 +7,10 @@
                                                android:background="#FFFFFF"
                                                android:animateLayoutChanges="true">
     <TextView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+        style="@style/text_normal"
         android:id="@+id/recv_text"
         android:gravity="right"
-        style="@style/text_normal"
+
     />
     <ImageView
         android:layout_width="fill_parent"

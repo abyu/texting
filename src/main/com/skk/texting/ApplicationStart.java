@@ -19,6 +19,7 @@ public class ApplicationStart extends RoboSmallApplication {
 
     @Inject PersonFactory personFactory;
     @Inject ListItemClickListener itemClickListener;
+    @Inject ViewProvider viewProvider;
     ListView messagesListView;
 
     @Override
@@ -32,6 +33,7 @@ public class ApplicationStart extends RoboSmallApplication {
         TextMessageAdaptor textMessageAdaptor = new TextMessageAdaptor(this, smsContent, personFactory);
 
         itemClickListener.setViewFlipper(viewFlipper());
+
 
         new TextMessagesView(messagesListView, textMessageAdaptor).setItemClickListener(itemClickListener);
     }
@@ -66,18 +68,21 @@ public class ApplicationStart extends RoboSmallApplication {
     }
 
     private void attachReplyButtonHandler(View messageConsole) {
-        final Button replyButton = (Button) messageConsole.findViewById(R.id.reply);
+        final Button addReply = (Button) messageConsole.findViewById(R.id.add_reply);
+        Button replyButton = (Button) messageConsole.findViewById(R.id.reply);
         final EditText replyText = (EditText) messageConsole.findViewById(R.id.reply_text);
         final Animation slideInUp = AnimationUtils.loadAnimation(this, R.anim.slide_in_up);
         final Animation slideOutDown = AnimationUtils.loadAnimation(this, R.anim.slide_out_down);
-        replyButton.setOnClickListener(new View.OnClickListener() {
+
+        viewProvider.assignView(ConversationAdaptor.class.getName(), "replyButton", replyButton);
+        viewProvider.assignView(ConversationAdaptor.class.getName(), "replyText", replyText);
+        addReply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(replyText.getVisibility() == View.VISIBLE) {
+                if (replyText.getVisibility() == View.VISIBLE) {
                     replyText.startAnimation(slideOutDown);
                     replyText.setVisibility(View.GONE);
-                }
-                else{
+                } else {
                     replyText.startAnimation(slideInUp);
                     replyText.setVisibility(View.VISIBLE);
                 }

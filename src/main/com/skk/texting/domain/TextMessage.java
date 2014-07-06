@@ -1,6 +1,7 @@
 package com.skk.texting.domain;
 
 import android.database.Cursor;
+import android.widget.EditText;
 import com.skk.texting.constants.TextMessageConstants;
 import com.skk.texting.factory.PersonFactory;
 
@@ -9,6 +10,10 @@ public class TextMessage {
     private String messageText;
     private Person person;
     private String messageType;
+
+    public TextMessage(String messageText) {
+        this.messageText = messageText;
+    }
 
     public void setThreadId(String threadId) {
         this.threadId = threadId;
@@ -96,7 +101,7 @@ public class TextMessage {
         return name;
     }
 
-    public String Address() {
+    public String replyToAddress() {
         return person.getAddress();
     }
 
@@ -112,8 +117,23 @@ public class TextMessage {
         return messageType;
     }
 
-    public boolean IsSent() {
+    public boolean isSent() {
         return messageType.equals(TextMessageConstants.MessageType.SENT);
+    }
+
+    public static TextMessage fromCursor(Cursor cursor) {
+        TextMessage textMessage = new TextMessage();
+
+        String message = cursor.getString(cursor.getColumnIndex(TextMessageConstants.MESSAGE_TEXT));
+        textMessage.setMessageText(message);
+
+        String threadId = cursor.getString(cursor.getColumnIndex(TextMessageConstants.THREAD_ID));
+        textMessage.setThreadId(threadId);
+
+        String messageType = cursor.getString(cursor.getColumnIndex(TextMessageConstants.TYPE));
+        textMessage.setMessageType(messageType);
+
+        return textMessage;
     }
 }
 
