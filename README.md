@@ -29,3 +29,5 @@ Creating a Signed APK
     - RELEASE_KEY_PASSWORD='your key password'
 2. Run `gradle build` or `gradle assembleSigned`
 3. The signed apk is available in build/apk/Texting-Signed.apk
+
+Get the app from [Google Play Store](https://play.google.com/store/apps/details?id=com.skk.texting)
