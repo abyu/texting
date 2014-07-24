@@ -82,6 +82,8 @@ public class TextMessage {
         return "TextMessage{" +
                 "messageText='" + messageText + '\'' +
                 ", person=" + person +
+                ", messageType='" + messageType + '\'' +
+                ", threadId='" + threadId + '\'' +
                 '}';
     }
 

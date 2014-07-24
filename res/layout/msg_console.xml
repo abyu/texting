@@ -55,14 +55,18 @@
                 android:id="@+id/reply"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:text="reply"
+                android:text="send"
                 android:textSize="10dp"
+                android:textColor="@android:color/black"
+                android:background="@drawable/button"
                 />
             <Button
                 android:id="@+id/add_reply"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:text="Up"
+                android:text="reply"
+                android:textColor="@android:color/black"
+                android:background="@drawable/button"
                 android:textSize="10dp"/>
         </LinearLayout>
 
