@@ -7,15 +7,11 @@ import com.google.inject.Singleton;
 import java.util.Dictionary;
 import java.util.HashMap;
 
-/**
- * Created by kishorek on 7/5/14.
- */
 @Singleton
-public class ViewProvider {
+public final class ViewProvider {
 
     private static volatile ViewProvider instance = new ViewProvider();
     private final HashMap<String, HashMap<String, View>> viewCollection;
-
 
     protected ViewProvider(){
         viewCollection = new HashMap<String, HashMap<String, View>>();

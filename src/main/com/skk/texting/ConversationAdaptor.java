@@ -11,8 +11,7 @@ import com.skk.texting.domain.Conversation;
 import com.skk.texting.domain.ConversationRepository;
 import com.skk.texting.domain.TextMessage;
 
-
-public class ConversationAdaptor extends CursorAdapter implements BackgroundTask {
+public class ConversationAdaptor extends CursorAdapter implements BackgroundTask, EventHandler {
 
     private ViewProvider viewProvider;
     private ConversationRepository conversationRepository;
@@ -20,11 +19,12 @@ public class ConversationAdaptor extends CursorAdapter implements BackgroundTask
 
     private volatile TextMessage replyMessage;
 
-    public ConversationAdaptor(Context context, Conversation conversation, ViewProvider viewProvider, ConversationRepository conversationRepository) {
+    public ConversationAdaptor(Context context, Conversation conversation, ViewProvider viewProvider, ConversationRepository conversationRepository, EventRepository eventRepository) {
         super(context, conversation.getCursorEntity(), false);
         this.conversation = conversation;
         this.viewProvider = viewProvider;
         this.conversationRepository = conversationRepository;
+        eventRepository.register(this, Event.SMSReceived);
     }
 
     @Override
@@ -41,7 +41,11 @@ public class ConversationAdaptor extends CursorAdapter implements BackgroundTask
             public void onClick(View view) {
 
                 replyMessage = new TextMessage(replyText.getText().toString());
-                replyToAction.execute();
+                String messageText = replyMessage.getMessageText();
+                if (!messageText.isEmpty()) {
+                    conversationRepository.replyTo(conversation, replyMessage);
+                    replyToAction.execute();
+                }
                 replyText.setText("");
             }
         });
@@ -60,7 +64,6 @@ public class ConversationAdaptor extends CursorAdapter implements BackgroundTask
 
         return super.getView(position, convertView, parent);
     }
-
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
@@ -85,19 +88,20 @@ public class ConversationAdaptor extends CursorAdapter implements BackgroundTask
     public void task() {
         int initialCount = getCursor().getCount();
         Cursor newCursor;
-        String messageText = replyMessage.getMessageText();
-        if (!messageText.isEmpty()) {
-            conversationRepository.replyTo(conversation, replyMessage);
-            try {
-                do {
-                    Thread.sleep(5);
-                    conversation = conversationRepository.loadConversations(conversation.getThreadId());
-                    newCursor = conversation.getCursorEntity();
-                } while (!(newCursor.getCount() > initialCount));
-            } catch (InterruptedException e) {
-                Log.e("TEXTING:", "Exception occurred while trying to reload conversation: ", e);
-            }
+        try {
+            do {
+                Thread.sleep(5);
+                conversation = conversationRepository.loadConversations(conversation.getThreadId());
+                newCursor = conversation.getCursorEntity();
+            } while (!(newCursor.getCount() > initialCount));
+        } catch (InterruptedException e) {
+            Log.e("TEXTING:", "Exception occurred while trying to reload conversation: ", e);
         }
+    }
+
+    @Override
+    public void handleEvent() {
+        new AsyncCursorUpdate(this).execute();
     }
 
     private ViewType getViewType(Cursor cursor) {

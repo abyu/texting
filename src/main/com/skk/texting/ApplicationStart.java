@@ -20,6 +20,8 @@ public class ApplicationStart extends RoboSmallApplication {
     @Inject PersonFactory personFactory;
     @Inject ListItemClickListener itemClickListener;
     @Inject ViewProvider viewProvider;
+    @Inject EventRepository eventRepository;
+
     ListView messagesListView;
 
     @Override
@@ -30,7 +32,7 @@ public class ApplicationStart extends RoboSmallApplication {
         messagesListView = (ListView) findViewById(R.id.messages);
 
         Cursor smsContent = getContentResolver().query(Uri.parse("content://mms-sms/conversations"), null, null, null, "date DESC");
-        TextMessageAdaptor textMessageAdaptor = new TextMessageAdaptor(this, smsContent, personFactory);
+        TextMessageAdaptor textMessageAdaptor = new TextMessageAdaptor(this, smsContent, personFactory, eventRepository, getContentResolver());
 
         itemClickListener.setViewFlipper(viewFlipper());
 
@@ -76,6 +78,7 @@ public class ApplicationStart extends RoboSmallApplication {
 
         viewProvider.assignView(ConversationAdaptor.class.getName(), "replyButton", replyButton);
         viewProvider.assignView(ConversationAdaptor.class.getName(), "replyText", replyText);
+
         addReply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

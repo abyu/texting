@@ -8,6 +8,7 @@ import android.widget.ListView;
 import android.widget.ViewFlipper;
 import com.google.inject.Inject;
 import com.skk.texting.ConversationAdaptor;
+import com.skk.texting.EventRepository;
 import com.skk.texting.R;
 import com.skk.texting.ViewProvider;
 import com.skk.texting.constants.TextMessageConstants;
@@ -22,13 +23,15 @@ public class ListItemClickListener implements AdapterView.OnItemClickListener {
     private PersonFactory personFactory;
     private ViewProvider viewProvider;
     private ContentResolver contentResolver;
+    private EventRepository eventRepository;
 
     @Inject
-    public ListItemClickListener(ConversationRepository conversationRepository, PersonFactory personFactory, ViewProvider viewProvider, ContentResolver contentResolver) {
+    public ListItemClickListener(ConversationRepository conversationRepository, PersonFactory personFactory, ViewProvider viewProvider, ContentResolver contentResolver, EventRepository eventRepository) {
         this.conversationRepository = conversationRepository;
         this.personFactory = personFactory;
         this.viewProvider = viewProvider;
         this.contentResolver = contentResolver;
+        this.eventRepository = eventRepository;
     }
 
     @Override
@@ -41,7 +44,7 @@ public class ListItemClickListener implements AdapterView.OnItemClickListener {
         ListView listView = (ListView) currentView.findViewById(R.id.listView);
 
         Conversation conversation = conversationRepository.loadConversations(threadId);
-        ConversationAdaptor conversationAdaptor = new ConversationAdaptor(currentView.getContext(), conversation, viewProvider, conversationRepository);
+        ConversationAdaptor conversationAdaptor = new ConversationAdaptor(currentView.getContext(), conversation, viewProvider, conversationRepository, eventRepository);
         listView.setAdapter(conversationAdaptor);
     }
 
