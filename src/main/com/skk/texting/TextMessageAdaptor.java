@@ -54,6 +54,7 @@ public class TextMessageAdaptor extends CursorAdapter implements EventHandler<In
             return true;
         }
 
+        taskComplete(); //force reload the cursor, so that the order get reflected.
         return false;
     }
 
@@ -71,8 +72,6 @@ public class TextMessageAdaptor extends CursorAdapter implements EventHandler<In
 
     @Override
     public void taskComplete() {
-        getCursor().close();
-
         Cursor smsContent = contentResolver.query(Uri.parse("content://mms-sms/conversations"), null, null, null, "date DESC");
 
         changeCursor(smsContent);

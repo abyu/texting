@@ -22,7 +22,7 @@ public class IncomingSmsListener extends RoboBroadcastReceiver {
     protected void handleReceive(Context context, Intent intent) {
 
         ArrayList<EventHandler> handlers = eventRepository.getHandlers(Event.SMSReceived);
-        IncomingSmsData incomingSmsData = constructEventData(intent);
+        EventData incomingSmsData = constructEventData(intent);
 
         for (EventHandler handler : handlers) {
             handler.handleEvent(incomingSmsData);
