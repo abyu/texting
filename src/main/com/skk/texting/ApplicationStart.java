@@ -36,10 +36,8 @@ public class ApplicationStart extends RoboSmallApplication {
 
         itemClickListener.setViewFlipper(viewFlipper());
 
-
         new TextMessagesView(messagesListView, textMessageAdaptor).setItemClickListener(itemClickListener);
     }
-
 
     private ViewFlipper viewFlipper(){
         final ViewFlipper viewFlipper = (ViewFlipper) findViewById(R.id.viewFlipper);
@@ -92,7 +90,6 @@ public class ApplicationStart extends RoboSmallApplication {
             }
         });
     }
-
 
 }
 

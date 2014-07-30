@@ -1,14 +1,14 @@
 package com.skk.texting.listener;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.telephony.SmsMessage;
 import android.util.Log;
 import com.google.inject.Inject;
 import com.skk.texting.Event;
 import com.skk.texting.EventHandler;
 import com.skk.texting.EventRepository;
-import com.skk.texting.di.RoboSmallApplication;
 import roboguice.receiver.RoboBroadcastReceiver;
 
 import java.util.ArrayList;
@@ -22,9 +22,25 @@ public class IncomingSmsListener extends RoboBroadcastReceiver {
     protected void handleReceive(Context context, Intent intent) {
 
         ArrayList<EventHandler> handlers = eventRepository.getHandlers(Event.SMSReceived);
+        IncomingSmsData incomingSmsData = constructEventData(intent);
 
-        for (EventHandler handler : handlers){
-            handler.handleEvent();
+        for (EventHandler handler : handlers) {
+            handler.handleEvent(incomingSmsData);
         }
     }
+
+    private IncomingSmsData constructEventData(Intent intent) {
+        IncomingSmsData incomingSmsData = new IncomingSmsData();
+
+        Bundle extras = intent.getExtras();
+        Object[] pdus = (Object[]) extras.get("pdus");
+        if(pdus != null) {
+            SmsMessage me = SmsMessage.createFromPdu((byte[]) pdus[0]);
+            incomingSmsData.setSmsMessage(me);
+        }
+        return incomingSmsData;
+    }
 }
+
+
+

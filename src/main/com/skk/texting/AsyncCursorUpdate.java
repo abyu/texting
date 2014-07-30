@@ -1,16 +1,15 @@
 package com.skk.texting;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 public class AsyncCursorUpdate extends AsyncTask<Void, Void, Void> {
 
     private BackgroundTask backgroundTask;
 
     public AsyncCursorUpdate(BackgroundTask backgroundTask){
-
         this.backgroundTask = backgroundTask;
     }
-
 
     @Override
     protected Void doInBackground(Void... voids) {

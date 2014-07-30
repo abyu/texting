@@ -1,5 +1,7 @@
 package com.skk.texting;
 
-public interface EventHandler{
-    public void handleEvent();
+import com.skk.texting.listener.EventData;
+
+public interface EventHandler<T extends EventData>{
+    public boolean handleEvent(T eventData);
 }
