@@ -1,7 +1,6 @@
 package com.skk.texting.domain;
 
 import android.database.Cursor;
-import android.widget.EditText;
 import com.skk.texting.constants.TextMessageConstants;
 import com.skk.texting.factory.PersonFactory;
 
@@ -10,6 +9,7 @@ public class TextMessage {
     private String messageText;
     private Person person;
     private String messageType;
+    private int readStatus;
 
     public TextMessage(String messageText) {
         this.messageText = messageText;
@@ -45,6 +45,9 @@ public class TextMessage {
 
         String messageType = cursor.getString(cursor.getColumnIndex(TextMessageConstants.TYPE));
         textMessage.setMessageType(messageType);
+
+        int readStatus = cursor.getInt(cursor.getColumnIndex(TextMessageConstants.READ_STATUS));
+        textMessage.setReadStatus(readStatus);
 
         return textMessage;
     }
@@ -103,10 +106,6 @@ public class TextMessage {
         return name;
     }
 
-    public String replyToAddress() {
-        return person.getAddress();
-    }
-
     public String getThreadId() {
         return threadId;
     }
@@ -137,5 +136,15 @@ public class TextMessage {
 
         return textMessage;
     }
+
+    public boolean isUnread() {
+        return readStatus == TextMessageConstants.UN_READ;
+    }
+
+    public void setReadStatus(int readStatus) {
+        this.readStatus = readStatus;
+    }
+
+
 }
 

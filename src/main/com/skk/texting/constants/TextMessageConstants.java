@@ -34,4 +34,7 @@ public class TextMessageConstants {
 
     }
 
+    public static final int READ = 1;
+    public static final int UN_READ = 0;
+
 }

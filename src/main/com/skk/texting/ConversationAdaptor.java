@@ -20,7 +20,6 @@ public class ConversationAdaptor extends CursorAdapter implements BackgroundTask
 
     private ViewProvider viewProvider;
     private ConversationRepository conversationRepository;
-    private EventRepository eventRepository;
     private Conversation conversation;
 
     private volatile TextMessage replyMessage;
@@ -30,7 +29,6 @@ public class ConversationAdaptor extends CursorAdapter implements BackgroundTask
         this.conversation = conversation;
         this.viewProvider = viewProvider;
         this.conversationRepository = conversationRepository;
-        this.eventRepository = eventRepository;
         eventRepository.register(this, Event.SMSReceived);
     }
 

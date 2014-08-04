@@ -3,6 +3,7 @@ package com.skk.texting;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.telephony.PhoneNumberUtils;
 import android.util.Log;
@@ -32,8 +33,7 @@ public class TextMessageAdaptor extends CursorAdapter implements EventHandler<In
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        View view = layoutInflater.inflate(R.layout.msg_row, null);
-        return view;
+        return layoutInflater.inflate(R.layout.msg_row, null);
     }
 
     @Override
@@ -43,6 +43,13 @@ public class TextMessageAdaptor extends CursorAdapter implements EventHandler<In
 
         TextMessage textMessage = TextMessage.fromCursor(cursor, personFactory);
         contactName.setText(textMessage.getDisplayName());
+
+        Drawable drawable = view.getResources().getDrawable(R.drawable.touch_text_view);
+        if(textMessage.isUnread())
+            drawable = view.getResources().getDrawable(R.drawable.unread_text_view);
+
+        view.setBackground(drawable);
+
     }
 
     @Override
@@ -53,7 +60,6 @@ public class TextMessageAdaptor extends CursorAdapter implements EventHandler<In
             new AsyncCursorUpdate(this).execute();
             return true;
         }
-
         taskComplete(); //force reload the cursor, so that the order get reflected.
         return false;
     }
@@ -80,7 +86,7 @@ public class TextMessageAdaptor extends CursorAdapter implements EventHandler<In
     @Override
     public void task() {
         int initialCount = getCursor().getCount();
-        int retryCount = 0;
+        int retryCount;
         Cursor newCursor;
         try {
             do {
