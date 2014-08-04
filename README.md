@@ -4,7 +4,7 @@ Texting
 
 Texting android app built on Sony Small Apps SDK.
 
-Small app to view your text messages. Useful when you want to quickly refer your messages.
+Small app to view your text messages and reply to them.
 
 Tools used:
 ---------------
