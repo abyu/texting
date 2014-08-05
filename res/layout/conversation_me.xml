@@ -7,8 +7,7 @@
               android:background="#FFFFFF"
               android:animateLayoutChanges="true">
 
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/sent_text"
+    <TextView android:id="@+id/sent_text"
               style="@style/text_normal"/>
 
     <ImageView

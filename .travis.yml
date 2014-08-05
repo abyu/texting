@@ -11,8 +11,8 @@ before_install:
 - wget http://texting-tools.googlecode.com/svn/trunk/addon-sony_add-on_sdk_2_1-sony-16.tar.gz
 - tar -xzf addon-sony_add-on_sdk_2_1-sony-16.tar.gz
 - mv addon-sony_add-on_sdk_2_1-sony-16 $ANDROID_HOME/add-ons/
-- wget https://dl-ssl.google.com/android/repository/build-tools_r19.0.3-linux.zip
-- unzip build-tools_r19.0.3-linux.zip
+- wget https://dl-ssl.google.com/android/repository/build-tools_r19.1-linux.zip
+- unzip build-tools_r19.1-linux.zip
 - mkdir -p $ANDROID_HOME/build-tools
-- mv android-4.4.2 $ANDROID_HOME/build-tools/19.0.3
+- mv android-4.4.2 $ANDROID_HOME/build-tools/19.1.0
 - gradle -v
