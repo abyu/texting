@@ -10,8 +10,8 @@ Tools used:
 ---------------
 
 1. IntelliJIdea Community edition(v~13)
-2. Gradle v1.10
-3. Sony small apps sdk 2.1
+2. Gradle v1.11
+3. Sony small apps sdk 3.0
 
 Command line Build Targets:
 ----------------------------
