@@ -30,4 +30,4 @@ Creating a Signed APK
 2. Run `gradle build` or `gradle assembleSigned`
 3. The signed apk is available in build/apk/Texting-Signed.apk
 
-<b>Get the app from [Google Play Store](https://play.google.com/store/apps/details?id=com.skk.texting)<b>
+**Get the app from [Google Play Store](https://play.google.com/store/apps/details?id=com.skk.texting)**
