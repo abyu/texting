@@ -22,28 +22,36 @@ public final class EventRepository {
 
     public void register(EventHandler handler, Event eventName){
 
-        ArrayList<WeakReference<EventHandler>> eventHandlers = events.get(eventName);
-        if(eventHandlers == null)
-            eventHandlers = new ArrayList<WeakReference<EventHandler>>();
+        ArrayList<WeakReference<EventHandler>> eventHandlers = emptyIfNull(events.get(eventName));
 
-        eventHandlers.add(new WeakReference<EventHandler>(handler));
+        if(!getInstances(eventHandlers).contains(handler))
+            eventHandlers.add(new WeakReference<EventHandler>(handler));
+
         events.put(eventName, eventHandlers);
     }
 
-    public ArrayList<EventHandler> getHandlers(Event eventName){
-        ArrayList<WeakReference<EventHandler>> weakHandlers = events.get(eventName);
-        ArrayList<EventHandler> handlers = new ArrayList<EventHandler>();
+    public ArrayList<EventHandler> getHandlers(Event event){
+        ArrayList<WeakReference<EventHandler>> weakHandlers = events.get(event);
 
-        for(WeakReference<EventHandler> weakHandler : weakHandlers){
-            EventHandler handler = weakHandler.get();
-            if(handler != null){
-                handlers.add(handler);
-            }
-        }
-        return handlers;
+        return getInstances(weakHandlers);
     }
 
+    private <T> ArrayList<T> emptyIfNull(ArrayList<T> list){
+        return list != null ? list : new ArrayList<T>();
+    }
 
+    private <T> ArrayList<T> getInstances(ArrayList<WeakReference<T>> weakReferences){
+        ArrayList<T> instances = new ArrayList<T>();
+
+        for (WeakReference<T> weakReference : emptyIfNull(weakReferences)) {
+            T instance = weakReference.get();
+            if (instance != null) {
+                instances.add(instance);
+            }
+        }
+
+        return instances;
+    }
 }
 
 
