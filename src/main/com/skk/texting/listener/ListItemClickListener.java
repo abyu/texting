@@ -1,7 +1,6 @@
 package com.skk.texting.listener;
 
 import android.content.ContentResolver;
-import android.content.Context;
 import android.database.Cursor;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,17 +17,11 @@ public class ListItemClickListener implements AdapterView.OnItemClickListener {
 
     private ViewFlipper viewFlipper;
     private ConversationRepository conversationRepository;
-    private PersonFactory personFactory;
-    private ViewProvider viewProvider;
-    private ContentResolver contentResolver;
     private EventRepository eventRepository;
 
     @Inject
-    public ListItemClickListener(ConversationRepository conversationRepository, PersonFactory personFactory, ViewProvider viewProvider, ContentResolver contentResolver, EventRepository eventRepository) {
+    public ListItemClickListener(ConversationRepository conversationRepository, EventRepository eventRepository) {
         this.conversationRepository = conversationRepository;
-        this.personFactory = personFactory;
-        this.viewProvider = viewProvider;
-        this.contentResolver = contentResolver;
         this.eventRepository = eventRepository;
     }
 
@@ -42,8 +35,9 @@ public class ListItemClickListener implements AdapterView.OnItemClickListener {
         ListView listView = (ListView) currentView.findViewById(R.id.listView);
 
         Conversation conversation = conversationRepository.loadConversations(threadId);
-        ConversationAdaptor conversationAdaptor = new ConversationAdaptor(currentView.getContext(), conversation, viewProvider, conversationRepository, eventRepository);
+        ConversationAdaptor conversationAdaptor = new ConversationAdaptor(currentView.getContext(), conversation, conversationRepository, eventRepository);
         listView.setAdapter(conversationAdaptor);
+
         TextingApplication applicationContext = (TextingApplication) currentView.getContext().getApplicationContext();
         applicationContext.setCurrentConversation(conversation);
     }

@@ -8,22 +8,27 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import com.google.inject.Inject;
+import com.skk.texting.Event;
+import com.skk.texting.EventRepository;
 import com.skk.texting.R;
 import com.skk.texting.TextingApplication;
 import com.skk.texting.domain.Conversation;
 import com.skk.texting.domain.ConversationRepository;
 import com.skk.texting.domain.TextMessage;
+import com.skk.texting.listener.RepliedSms;
 
 public class MessageConsoleWrapper implements View.OnClickListener {
 
     private EditText replyText;
     private ConversationRepository conversationRepository;
+    private EventRepository eventRepository;
     private Button replyButton;
 
     @Inject
-    public MessageConsoleWrapper(ConversationRepository conversationRepository){
+    public MessageConsoleWrapper(ConversationRepository conversationRepository, EventRepository eventRepository) {
 
         this.conversationRepository = conversationRepository;
+        this.eventRepository = eventRepository;
     }
 
     public void initialize(View messageConsole) {
@@ -35,25 +40,31 @@ public class MessageConsoleWrapper implements View.OnClickListener {
 
     }
 
-    public void replyButtonOnClick(View view){
+    public void replyButtonOnClick(View view) {
         TextingApplication applicationContext = (TextingApplication) view.getContext().getApplicationContext();
 
         TextMessage replyMessage = new TextMessage(replyText.getText().toString());
-                String messageText = replyMessage.getMessageText();
-                Conversation currentConversation = applicationContext.getCurrentConversation();
+        String messageText = replyMessage.getMessageText();
+        Conversation currentConversation = applicationContext.getCurrentConversation();
 
-                if (!messageText.isEmpty()) {
-                    conversationRepository.replyTo(currentConversation, replyMessage);
-                }
-                replyText.setText("");
-            }
+        if (!messageText.isEmpty()) {
+            conversationRepository.replyTo(currentConversation, replyMessage);
+        }
+        replyText.setText("");
+
+        try {
+            eventRepository.raiseEvent(Event.SMSReplied, new RepliedSms());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void onClick(View view) {
         replyButtonOnClick(view);
     }
 
-    private class ReplyButtonEventHandler implements View.OnClickListener{
+    private class ReplyButtonEventHandler implements View.OnClickListener {
 
         @Override
         public void onClick(View view) {
@@ -61,12 +72,12 @@ public class MessageConsoleWrapper implements View.OnClickListener {
         }
     }
 
-    private class ReplyTextEventHandler implements TextWatcher{
+    private class ReplyTextEventHandler implements TextWatcher {
 
         private final Animation slideInUp;
         private final Animation slideOutDown;
 
-        public ReplyTextEventHandler(View messageConsole){
+        public ReplyTextEventHandler(View messageConsole) {
             slideInUp = AnimationUtils.loadAnimation(messageConsole.getContext(), R.anim.slide_in_up);
             slideOutDown = AnimationUtils.loadAnimation(messageConsole.getContext(), R.anim.slide_out_down);
         }
@@ -79,14 +90,13 @@ public class MessageConsoleWrapper implements View.OnClickListener {
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
             boolean buttonVisible = replyButton.getVisibility() == View.VISIBLE;
-            if(replyText.getText().toString().isEmpty()) {
-                if(buttonVisible) {
+            if (replyText.getText().toString().isEmpty()) {
+                if (buttonVisible) {
                     replyButton.startAnimation(slideOutDown);
                     replyButton.setVisibility(View.GONE);
                 }
-            }
-            else {
-                if(!buttonVisible) {
+            } else {
+                if (!buttonVisible) {
                     replyButton.startAnimation(slideInUp);
                     replyButton.setVisibility(View.VISIBLE);
                 }

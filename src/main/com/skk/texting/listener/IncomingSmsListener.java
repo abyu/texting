@@ -11,21 +11,24 @@ import com.skk.texting.EventHandler;
 import com.skk.texting.EventRepository;
 import roboguice.receiver.RoboBroadcastReceiver;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 public class IncomingSmsListener extends RoboBroadcastReceiver {
 
-    @Inject
-    public EventRepository eventRepository;
+    @Inject EventRepository eventRepository;
 
     @Override
     protected void handleReceive(Context context, Intent intent) {
 
-        ArrayList<EventHandler> handlers = eventRepository.getHandlers(Event.SMSReceived);
         EventData incomingSmsData = constructEventData(intent);
 
-        for (EventHandler handler : handlers) {
-            handler.handleEvent(incomingSmsData);
+        try {
+            eventRepository.raiseEvent(Event.SMSReceived, incomingSmsData);
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
         }
     }
 

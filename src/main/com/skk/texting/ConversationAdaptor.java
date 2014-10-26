@@ -13,51 +13,27 @@ import com.skk.texting.constants.ApplicationConstants;
 import com.skk.texting.domain.Conversation;
 import com.skk.texting.domain.ConversationRepository;
 import com.skk.texting.domain.TextMessage;
-import com.skk.texting.listener.EventData;
 import com.skk.texting.listener.IncomingSmsData;
+import com.skk.texting.listener.RepliedSms;
 
-public class ConversationAdaptor extends CursorAdapter implements BackgroundTask, EventHandler<IncomingSmsData> {
+public class ConversationAdaptor extends CursorAdapter implements BackgroundTask, EventHandler {
 
-    private ViewProvider viewProvider;
     private ConversationRepository conversationRepository;
     private Conversation conversation;
 
-    private volatile TextMessage replyMessage;
-
-    public ConversationAdaptor(Context context, Conversation conversation, ViewProvider viewProvider, ConversationRepository conversationRepository, EventRepository eventRepository) {
+    public ConversationAdaptor(Context context, Conversation conversation, ConversationRepository conversationRepository, EventRepository eventRepository) {
         super(context, conversation.getCursorEntity(), false);
         this.conversation = conversation;
-        this.viewProvider = viewProvider;
         this.conversationRepository = conversationRepository;
         eventRepository.register(this, Event.SMSReceived);
+        eventRepository.register(this, Event.SMSReplied);
     }
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
         TextMessage textMessage = conversation.getMessage(cursor);
-        View view = getMessageView(context, textMessage);
 
-//        Button replyButton = (Button) viewProvider.getView("replyButton");
-//        final EditText replyText = (EditText) viewProvider.getView("replyText");
-//        final TextingApplication applicationContext = (TextingApplication)context.getApplicationContext();
-//        final AsyncCursorUpdate replyToAction = new AsyncCursorUpdate(this);
-
-//        replyButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                replyMessage = new TextMessage(replyText.getText().toString());
-//                String messageText = replyMessage.getMessageText();
-//                Conversation currentConversation = applicationContext.getCurrentConversation();
-//
-//                if (!messageText.isEmpty()) {
-//                    conversationRepository.replyTo(currentConversation, replyMessage);
-//                    replyToAction.execute();
-//                }
-//                replyText.setText("");
-//            }
-//        });
-        return view;
+        return getMessageView(context, textMessage);
     }
 
     @Override
@@ -109,8 +85,8 @@ public class ConversationAdaptor extends CursorAdapter implements BackgroundTask
         }
     }
 
-    @Override
-    public boolean handleEvent(IncomingSmsData eventData) {
+    @HandleEvent(eventType = Event.SMSReceived)
+    public boolean handleSmsReceived(IncomingSmsData eventData) {
         SmsMessage smsMessage = eventData.getSmsMessage();
         if(smsMessage != null && PhoneNumberUtils.compare(smsMessage.getOriginatingAddress(), (conversation.getRecipientAddress()))) {
 
@@ -121,6 +97,14 @@ public class ConversationAdaptor extends CursorAdapter implements BackgroundTask
         }
 
         return false;
+    }
+
+    @HandleEvent(eventType = Event.SMSReplied)
+    public boolean handleSmsReplied(RepliedSms eventData){
+        AsyncCursorUpdate replyToAction = new AsyncCursorUpdate(this);
+        replyToAction.execute();
+
+        return true;
     }
 
     private ViewType getViewType(Cursor cursor) {

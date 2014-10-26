@@ -18,7 +18,7 @@ import com.skk.texting.domain.TextMessage;
 import com.skk.texting.factory.PersonFactory;
 import com.skk.texting.listener.IncomingSmsData;
 
-public class TextMessageAdaptor extends CursorAdapter implements EventHandler<IncomingSmsData>, BackgroundTask{
+public class TextMessageAdaptor extends CursorAdapter implements EventHandler, BackgroundTask{
 
     private PersonFactory personFactory;
     private ContentResolver contentResolver;
@@ -52,8 +52,8 @@ public class TextMessageAdaptor extends CursorAdapter implements EventHandler<In
 
     }
 
-    @Override
-    public boolean handleEvent(IncomingSmsData eventData) {
+    @HandleEvent(eventType = Event.SMSReceived)
+    public boolean handleSmsReceived(IncomingSmsData eventData) {
         String originatingAddress = eventData.getSmsMessage().getOriginatingAddress();
 
         if(!conversationExists(originatingAddress)) {
