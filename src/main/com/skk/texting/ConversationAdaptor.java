@@ -37,23 +37,26 @@ public class ConversationAdaptor extends CursorAdapter implements BackgroundTask
         TextMessage textMessage = conversation.getMessage(cursor);
         View view = getMessageView(context, textMessage);
 
-        Button replyButton = (Button) viewProvider.getView("replyButton");
-        final EditText replyText = (EditText) viewProvider.getView("replyText");
+//        Button replyButton = (Button) viewProvider.getView("replyButton");
+//        final EditText replyText = (EditText) viewProvider.getView("replyText");
+//        final TextingApplication applicationContext = (TextingApplication)context.getApplicationContext();
+//        final AsyncCursorUpdate replyToAction = new AsyncCursorUpdate(this);
 
-        final AsyncCursorUpdate replyToAction = new AsyncCursorUpdate(this);
-        replyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                replyMessage = new TextMessage(replyText.getText().toString());
-                String messageText = replyMessage.getMessageText();
-                if (!messageText.isEmpty()) {
-                    conversationRepository.replyTo(conversation, replyMessage);
-                    replyToAction.execute();
-                }
-                replyText.setText("");
-            }
-        });
+//        replyButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                replyMessage = new TextMessage(replyText.getText().toString());
+//                String messageText = replyMessage.getMessageText();
+//                Conversation currentConversation = applicationContext.getCurrentConversation();
+//
+//                if (!messageText.isEmpty()) {
+//                    conversationRepository.replyTo(currentConversation, replyMessage);
+//                    replyToAction.execute();
+//                }
+//                replyText.setText("");
+//            }
+//        });
         return view;
     }
 

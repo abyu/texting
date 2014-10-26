@@ -4,7 +4,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
@@ -15,16 +14,17 @@ import com.skk.texting.di.RoboSmallApplication;
 import com.skk.texting.factory.PersonFactory;
 import com.skk.texting.listener.ListItemClickListener;
 import com.skk.texting.listener.OnSwipeGestureHandler;
+import com.skk.texting.wrapper.MessageConsoleWrapper;
 
 
 public class ApplicationStart extends RoboSmallApplication {
 
     @Inject PersonFactory personFactory;
     @Inject ListItemClickListener itemClickListener;
-    @Inject ViewProvider viewProvider;
     @Inject EventRepository eventRepository;
 
     ListView messagesListView;
+    @Inject MessageConsoleWrapper messageConsoleWrapper;
 
     @Override
     protected void onCreate() {
@@ -63,50 +63,12 @@ public class ApplicationStart extends RoboSmallApplication {
         };
         messageConsole.setOnTouchListener(swipeListener);
 
-        attachReplyButtonHandler(messageConsole);
         viewFlipper.addView(messageConsole);
 
+        messageConsoleWrapper.initialize(messageConsole);
         return  viewFlipper;
     }
 
-    private void attachReplyButtonHandler(View messageConsole) {
-        final Button replyButton = (Button) messageConsole.findViewById(R.id.reply);
-        final EditText replyText = (EditText) messageConsole.findViewById(R.id.reply_text);
-        final Animation slideInUp = AnimationUtils.loadAnimation(this, R.anim.slide_in_up);
-        final Animation slideOutDown = AnimationUtils.loadAnimation(this, R.anim.slide_out_down);
-
-        viewProvider.assignView(ConversationAdaptor.class.getName(), "replyButton", replyButton);
-        viewProvider.assignView(ConversationAdaptor.class.getName(), "replyText", replyText);
-
-        replyText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                boolean buttonVisible = replyButton.getVisibility() == View.VISIBLE;
-                if(replyText.getText().toString().isEmpty()) {
-                    if(buttonVisible) {
-                        replyButton.startAnimation(slideOutDown);
-                        replyButton.setVisibility(View.GONE);
-                    }
-                }
-                else {
-                    if(!buttonVisible) {
-                        replyButton.startAnimation(slideInUp);
-                        replyButton.setVisibility(View.VISIBLE);
-                    }
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-    }
 
 }
 
