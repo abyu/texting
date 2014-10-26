@@ -1,4 +1,4 @@
-package com.skk.texting;
+package com.skk.texting.adaptor.view;
 
 import android.widget.TextView;
 

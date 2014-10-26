@@ -1,6 +1,5 @@
 package com.skk.texting.listener;
 
-import android.content.ContentResolver;
 import android.database.Cursor;
 import android.view.View;
 import android.widget.AdapterView;
@@ -8,10 +7,11 @@ import android.widget.ListView;
 import android.widget.ViewFlipper;
 import com.google.inject.Inject;
 import com.skk.texting.*;
+import com.skk.texting.adaptor.ConversationAdaptor;
 import com.skk.texting.constants.TextMessageConstants;
 import com.skk.texting.domain.Conversation;
 import com.skk.texting.domain.ConversationRepository;
-import com.skk.texting.factory.PersonFactory;
+import com.skk.texting.evented.EventRepository;
 
 public class ListItemClickListener implements AdapterView.OnItemClickListener {
 

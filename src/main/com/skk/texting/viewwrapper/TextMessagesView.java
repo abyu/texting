@@ -1,7 +1,8 @@
-package com.skk.texting;
+package com.skk.texting.viewwrapper;
 
 import android.widget.AdapterView;
 import android.widget.ListView;
+import com.skk.texting.adaptor.TextMessageAdaptor;
 
 public class TextMessagesView {
     private ListView listView;

@@ -1,4 +1,4 @@
-package com.skk.texting;
+package com.skk.texting.gesture;
 
 import android.view.MotionEvent;
 

@@ -3,6 +3,8 @@ package com.skk.texting;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import com.skk.texting.adaptor.TextMessageAdaptor;
+import com.skk.texting.viewwrapper.TextMessagesView;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

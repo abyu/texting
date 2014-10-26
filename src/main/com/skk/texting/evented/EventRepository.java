@@ -1,10 +1,7 @@
-package com.skk.texting;
+package com.skk.texting.evented;
 
-import android.util.Log;
 import com.google.inject.Singleton;
-import com.skk.texting.listener.EventData;
 
-import java.lang.annotation.Annotation;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

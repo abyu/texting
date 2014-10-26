@@ -1,20 +1,16 @@
-package com.skk.texting;
+package com.skk.texting.evented;
 
-import com.skk.texting.listener.EventData;
-import com.skk.texting.listener.IncomingSmsData;
-import com.skk.texting.listener.RepliedSms;
+import com.skk.texting.eventdata.IncomingSmsData;
+import com.skk.texting.eventdata.RepliedSms;
 import org.hamcrest.core.Is;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.mockito.Mock;
-import org.mockito.Spy;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
 

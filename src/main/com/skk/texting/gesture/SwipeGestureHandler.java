@@ -1,4 +1,4 @@
-package com.skk.texting.listener;
+package com.skk.texting.gesture;
 
 public interface SwipeGestureHandler {
     public boolean onSwipeLeft();

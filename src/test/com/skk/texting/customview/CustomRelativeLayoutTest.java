@@ -2,7 +2,7 @@ package com.skk.texting.customview;
 
 import android.view.MotionEvent;
 import android.widget.LinearLayout;
-import com.skk.texting.MotionEventRecorder;
+import com.skk.texting.gesture.MotionEventRecorder;
 import org.hamcrest.core.Is;
 import org.junit.Assert;
 import org.junit.Test;

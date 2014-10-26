@@ -1,4 +1,4 @@
-package com.skk.texting;
+package com.skk.texting.adaptor;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -9,12 +9,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import com.skk.texting.*;
+import com.skk.texting.adaptor.view.ViewHolder;
+import com.skk.texting.adaptor.view.ViewType;
+import com.skk.texting.async.AsyncCursorUpdate;
+import com.skk.texting.async.BackgroundTask;
 import com.skk.texting.constants.ApplicationConstants;
 import com.skk.texting.domain.Conversation;
 import com.skk.texting.domain.ConversationRepository;
 import com.skk.texting.domain.TextMessage;
-import com.skk.texting.listener.IncomingSmsData;
-import com.skk.texting.listener.RepliedSms;
+import com.skk.texting.evented.Event;
+import com.skk.texting.evented.EventHandler;
+import com.skk.texting.evented.EventRepository;
+import com.skk.texting.evented.HandleEvent;
+import com.skk.texting.eventdata.IncomingSmsData;
+import com.skk.texting.eventdata.RepliedSms;
 
 public class ConversationAdaptor extends CursorAdapter implements BackgroundTask, EventHandler {
 

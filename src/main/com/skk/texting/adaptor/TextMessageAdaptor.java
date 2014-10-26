@@ -1,4 +1,4 @@
-package com.skk.texting;
+package com.skk.texting.adaptor;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -12,13 +12,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
+import com.skk.texting.async.AsyncCursorUpdate;
+import com.skk.texting.async.BackgroundTask;
+import com.skk.texting.R;
 import com.skk.texting.constants.ApplicationConstants;
 import com.skk.texting.constants.TextMessageConstants;
 import com.skk.texting.domain.TextMessage;
+import com.skk.texting.evented.Event;
+import com.skk.texting.evented.EventHandler;
+import com.skk.texting.evented.EventRepository;
+import com.skk.texting.evented.HandleEvent;
 import com.skk.texting.factory.PersonFactory;
-import com.skk.texting.listener.IncomingSmsData;
+import com.skk.texting.eventdata.IncomingSmsData;
 
-public class TextMessageAdaptor extends CursorAdapter implements EventHandler, BackgroundTask{
+public class TextMessageAdaptor extends CursorAdapter implements EventHandler, BackgroundTask {
 
     private PersonFactory personFactory;
     private ContentResolver contentResolver;

@@ -1,4 +1,4 @@
-package com.skk.texting;
+package com.skk.texting.adaptor.view;
 
 /**
  * Created by kishorek on 7/15/14.

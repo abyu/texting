@@ -1,8 +1,9 @@
-package com.skk.texting.listener;
+package com.skk.texting.eventdata;
 
 import android.telephony.SmsMessage;
+import com.skk.texting.evented.EventData;
 
-public class IncomingSmsData implements EventData{
+public class IncomingSmsData implements EventData {
     private SmsMessage smsMessage;
 
     public SmsMessage getSmsMessage() {

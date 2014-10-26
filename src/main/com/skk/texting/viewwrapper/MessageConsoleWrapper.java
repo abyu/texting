@@ -1,4 +1,4 @@
-package com.skk.texting.wrapper;
+package com.skk.texting.viewwrapper;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -8,14 +8,14 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import com.google.inject.Inject;
-import com.skk.texting.Event;
-import com.skk.texting.EventRepository;
+import com.skk.texting.evented.Event;
+import com.skk.texting.evented.EventRepository;
 import com.skk.texting.R;
 import com.skk.texting.TextingApplication;
 import com.skk.texting.domain.Conversation;
 import com.skk.texting.domain.ConversationRepository;
 import com.skk.texting.domain.TextMessage;
-import com.skk.texting.listener.RepliedSms;
+import com.skk.texting.eventdata.RepliedSms;
 
 public class MessageConsoleWrapper implements View.OnClickListener {
 

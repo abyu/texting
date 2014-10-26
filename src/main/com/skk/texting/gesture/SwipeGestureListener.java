@@ -1,8 +1,7 @@
-package com.skk.texting.listener;
+package com.skk.texting.gesture;
 
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-import com.skk.texting.MotionEventRecorder;
 
 public class SwipeGestureListener extends GestureDetector.SimpleOnGestureListener {
     private static final float THRESHOLD_DISTANCE = 100;

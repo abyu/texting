@@ -3,11 +3,9 @@ package com.skk.texting.customview;
 import android.animation.LayoutTransition;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import com.skk.texting.MotionEventRecorder;
+import com.skk.texting.gesture.MotionEventRecorder;
 
 public class CustomRelativeLayout extends RelativeLayout {
 

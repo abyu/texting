@@ -1,4 +1,4 @@
-package com.skk.texting;
+package com.skk.texting.evented;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

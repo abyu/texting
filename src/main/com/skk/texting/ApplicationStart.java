@@ -2,26 +2,26 @@ package com.skk.texting;
 
 import android.database.Cursor;
 import android.net.Uri;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.*;
 import com.google.inject.Inject;
+import com.skk.texting.adaptor.TextMessageAdaptor;
 import com.skk.texting.di.RoboSmallApplication;
+import com.skk.texting.evented.EventRepository;
 import com.skk.texting.factory.PersonFactory;
 import com.skk.texting.listener.ListItemClickListener;
-import com.skk.texting.listener.OnSwipeGestureHandler;
-import com.skk.texting.wrapper.MessageConsoleWrapper;
+import com.skk.texting.gesture.OnSwipeGestureHandler;
+import com.skk.texting.viewwrapper.MessageConsoleWrapper;
+import com.skk.texting.viewwrapper.TextMessagesView;
 
 
 public class ApplicationStart extends RoboSmallApplication {
 
     @Inject PersonFactory personFactory;
     @Inject ListItemClickListener itemClickListener;
-    @Inject EventRepository eventRepository;
+    @Inject
+    EventRepository eventRepository;
 
     ListView messagesListView;
     @Inject MessageConsoleWrapper messageConsoleWrapper;

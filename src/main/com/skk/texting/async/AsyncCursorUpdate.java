@@ -1,7 +1,6 @@
-package com.skk.texting;
+package com.skk.texting.async;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 public class AsyncCursorUpdate extends AsyncTask<Void, Void, Void> {
 

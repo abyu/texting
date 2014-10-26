@@ -1,6 +1,7 @@
 package com.skk.texting;
 
 import android.view.MotionEvent;
+import com.skk.texting.gesture.MotionEventRecorder;
 import org.hamcrest.core.Is;
 import org.junit.Assert;
 import org.junit.Test;
