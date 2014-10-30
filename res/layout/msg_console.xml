@@ -32,7 +32,7 @@
             android:id="@+id/reply"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:text="send"
+            android:text="@string/send"
             android:textSize="10sp"
             android:textColor="@android:color/black"
             android:background="@drawable/button"
