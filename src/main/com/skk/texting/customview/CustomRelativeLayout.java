@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.RelativeLayout;
+import com.skk.texting.constants.ApplicationConstants;
 import com.skk.texting.gesture.MotionEventRecorder;
 
 public class CustomRelativeLayout extends RelativeLayout {
@@ -30,8 +31,8 @@ public class CustomRelativeLayout extends RelativeLayout {
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         if(ev.getAction() == MotionEvent.ACTION_DOWN){
-            MotionEventRecorder.recordEvent(ev, 0);
-            previousEvent = MotionEventRecorder.peekEvent(0);
+            MotionEventRecorder.recordEvent(ev, ApplicationConstants.RECORDED_START_SWIPE);
+            previousEvent = MotionEventRecorder.peekEvent(ApplicationConstants.RECORDED_START_SWIPE);
         }
 
         return isAPossibleFling(previousEvent, ev) || super.onInterceptTouchEvent(ev);

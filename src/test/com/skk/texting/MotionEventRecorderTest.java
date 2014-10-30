@@ -18,7 +18,7 @@ import static org.powermock.api.mockito.PowerMockito.when;
 @PrepareForTest(MotionEvent.class)
 public class MotionEventRecorderTest {
 
-    private static final int SAMPLE_ID = 0;
+    private static final String SAMPLE_ID = "AN_ID";
 
     @Test
     public void anEventIsRecordedWithTheGivenId(){

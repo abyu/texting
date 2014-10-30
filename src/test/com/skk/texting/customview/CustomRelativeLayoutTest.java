@@ -2,6 +2,7 @@ package com.skk.texting.customview;
 
 import android.view.MotionEvent;
 import android.widget.LinearLayout;
+import com.skk.texting.constants.ApplicationConstants;
 import com.skk.texting.gesture.MotionEventRecorder;
 import org.hamcrest.core.Is;
 import org.junit.Assert;
@@ -36,7 +37,7 @@ public class CustomRelativeLayoutTest {
 
         customRelativeLayout.onInterceptTouchEvent(motionEventDown);
 
-        Assert.assertThat(MotionEventRecorder.peekEvent(0), Is.is(motionEventDown));
+        Assert.assertThat(MotionEventRecorder.peekEvent(ApplicationConstants.RECORDED_START_SWIPE), Is.is(motionEventDown));
     }
 
     @Test
