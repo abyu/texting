@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.skk.texting.customview.CustomRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
     >
 
     <EditText
-        android:id="@+id/reply_text"
+        android:id="@+id/search_contact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
@@ -21,6 +21,9 @@
     <ListView
         android:id="@+id/contacts"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:textFilterEnabled="true"
+        android:animateLayoutChanges="true"
+        android:layout_below="@id/search_contact">
         </ListView>
-</LinearLayout>
+</com.skk.texting.customview.CustomRelativeLayout>
