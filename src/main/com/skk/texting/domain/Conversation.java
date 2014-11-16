@@ -14,6 +14,10 @@ public class Conversation {
         cursorEntity = conversationCursor;
     }
 
+    public Conversation() {
+
+    }
+
     public Cursor getCursorEntity() {
         return cursorEntity;
     }

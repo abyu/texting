@@ -35,17 +35,40 @@ public class ConversationRepository {
     }
 
 
-    public void replyTo(Conversation conversation, TextMessage replyMessage) {
+    public Conversation replyTo(Conversation conversation, TextMessage replyMessage) {
+
+        Conversation newConversation = conversation;
+        if(conversation == null){
+            newConversation = createNewConversation(replyMessage);
+
+        }
 
         ContentValues sentSms = new ContentValues();
-        sentSms.put(TextMessageConstants.ADDRESS, conversation.getRecipientAddress());
+        sentSms.put(TextMessageConstants.ADDRESS, newConversation.getRecipientAddress());
         sentSms.put(TextMessageConstants.MESSAGE_TEXT, replyMessage.getMessageText());
         sentSms.put(TextMessageConstants.TYPE, TextMessageConstants.MessageType.SENT);
-        sentSms.put(TextMessageConstants.THREAD_ID, conversation.getThreadId());
+        sentSms.put(TextMessageConstants.THREAD_ID, newConversation.getThreadId());
 
         contentResolver.insert(Uri.parse("content://sms/sent"), sentSms);
 
         SmsManager smsManager = SmsManager.getDefault();
-        smsManager.sendTextMessage(conversation.getRecipientAddress(), null, replyMessage.getMessageText(), null, null);
+        smsManager.sendTextMessage(newConversation.getRecipientAddress(), null, replyMessage.getMessageText(), null, null);
+
+        return newConversation;
+    }
+
+    private Conversation createNewConversation(TextMessage replyMessage) {
+        Conversation conversation = new Conversation();
+//        conversation.setRecipient(replyMessage.getPerson());
+        Person person = new Person();
+        person.setAddress("123");
+        conversation.setRecipient(person);
+        String projection = "MAX("+ TextMessageConstants.THREAD_ID +") as max_threadid";
+        Cursor query = contentResolver.query(Uri.parse("content://mms-sms/conversations"), new String[]{projection}, null, null, "date DESC");
+        if(query.moveToNext()) {
+            conversation.setThreadId(query.getString(query.getColumnIndex("max_threadid")));
+        }
+
+        return conversation;
     }
 }

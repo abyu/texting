@@ -12,6 +12,8 @@ import com.skk.texting.evented.EventRepository;
 import com.skk.texting.factory.PersonFactory;
 import com.skk.texting.listener.ListItemClickListener;
 import com.skk.texting.gesture.OnSwipeGestureHandler;
+import com.skk.texting.viewwrapper.AllContactsWrapper;
+import com.skk.texting.viewwrapper.HeaderWrapper;
 import com.skk.texting.viewwrapper.MessageConsoleWrapper;
 import com.skk.texting.viewwrapper.TextMessagesView;
 
@@ -20,11 +22,12 @@ public class ApplicationStart extends RoboSmallApplication {
 
     @Inject PersonFactory personFactory;
     @Inject ListItemClickListener itemClickListener;
-    @Inject
-    EventRepository eventRepository;
+    @Inject EventRepository eventRepository;
+    @Inject MessageConsoleWrapper messageConsoleWrapper;
+    @Inject HeaderWrapper headerWrapper;
+    @Inject AllContactsWrapper allContactsWrapper;
 
     ListView messagesListView;
-    @Inject MessageConsoleWrapper messageConsoleWrapper;
 
     @Override
     protected void onCreate() {
@@ -38,8 +41,20 @@ public class ApplicationStart extends RoboSmallApplication {
 
         itemClickListener.setViewFlipper(viewFlipper());
 
+        setHeader();
         new TextMessagesView(messagesListView, textMessageAdaptor).setItemClickListener(itemClickListener);
     }
+
+    private void setHeader() {
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View headerView = inflater.inflate(R.layout.header, null);
+        getWindow().setHeaderView(headerView);
+
+        headerWrapper.initialize(headerView);
+        headerWrapper.setViewFlipper((ViewFlipper) findViewById(R.id.viewFlipper));
+    }
+
+
 
     private ViewFlipper viewFlipper(){
         final ViewFlipper viewFlipper = (ViewFlipper) findViewById(R.id.viewFlipper);
@@ -62,10 +77,15 @@ public class ApplicationStart extends RoboSmallApplication {
 
         };
         messageConsole.setOnTouchListener(swipeListener);
-
         viewFlipper.addView(messageConsole);
-
         messageConsoleWrapper.initialize(messageConsole);
+
+        View allContacts = layoutInflater.inflate(R.layout.all_contacts, null);
+
+        allContactsWrapper.initialize(allContacts);
+        viewFlipper.addView(allContacts);
+        allContacts.setOnTouchListener(swipeListener);
+
         return  viewFlipper;
     }
 
