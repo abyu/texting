@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 import android.telephony.SmsManager;
+import android.util.Log;
 import com.google.inject.Inject;
 import com.skk.texting.constants.TextMessageConstants;
 import com.skk.texting.factory.PersonFactory;
@@ -35,39 +36,30 @@ public class ConversationRepository {
     }
 
 
-    public Conversation replyTo(Conversation conversation, TextMessage replyMessage) {
-
-        Conversation newConversation = conversation;
-        if(conversation == null){
-            newConversation = createNewConversation(replyMessage);
-
-        }
-
+    public void replyTo(Conversation conversation, TextMessage replyMessage) {
         ContentValues sentSms = new ContentValues();
-        sentSms.put(TextMessageConstants.ADDRESS, newConversation.getRecipientAddress());
+        sentSms.put(TextMessageConstants.ADDRESS, conversation.getRecipientAddress());
         sentSms.put(TextMessageConstants.MESSAGE_TEXT, replyMessage.getMessageText());
         sentSms.put(TextMessageConstants.TYPE, TextMessageConstants.MessageType.SENT);
-        sentSms.put(TextMessageConstants.THREAD_ID, newConversation.getThreadId());
+        sentSms.put(TextMessageConstants.THREAD_ID, conversation.getThreadId());
 
         contentResolver.insert(Uri.parse("content://sms/sent"), sentSms);
 
         SmsManager smsManager = SmsManager.getDefault();
-        smsManager.sendTextMessage(newConversation.getRecipientAddress(), null, replyMessage.getMessageText(), null, null);
+        smsManager.sendTextMessage(conversation.getRecipientAddress(), null, replyMessage.getMessageText(), null, null);
 
-        return newConversation;
     }
 
-    private Conversation createNewConversation(TextMessage replyMessage) {
-        Conversation conversation = new Conversation();
-//        conversation.setRecipient(replyMessage.getPerson());
-        Person person = new Person();
-        person.setAddress("123");
-        conversation.setRecipient(person);
-        String projection = "MAX("+ TextMessageConstants.THREAD_ID +") as max_threadid";
-        Cursor query = contentResolver.query(Uri.parse("content://mms-sms/conversations"), new String[]{projection}, null, null, "date DESC");
-        if(query.moveToNext()) {
-            conversation.setThreadId(query.getString(query.getColumnIndex("max_threadid")));
-        }
+    public Conversation newConversation(Person person) {
+        Conversation conversation = null;
+//        Cursor query = contentResolver.query(Uri.parse("content://mms-sms/conversations"), null, null, null, "date DESC");
+//        if(query.moveToNext()) {
+            String selection = TextMessageConstants.ADDRESS + " = '"+ person.getAddress() +"'";
+
+            Cursor result = contentResolver.query(Uri.parse("content://sms"), null, selection, null, "date ASC");
+
+            conversation = new Conversation(result);
+//        }
 
         return conversation;
     }

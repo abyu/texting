@@ -45,4 +45,5 @@ public class Conversation {
     public String getThreadId() {
         return threadId;
     }
+
 }

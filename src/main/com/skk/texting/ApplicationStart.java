@@ -86,6 +86,8 @@ public class ApplicationStart extends RoboSmallApplication {
         viewFlipper.addView(allContacts);
         allContacts.setOnTouchListener(swipeListener);
 
+        allContactsWrapper.setViewFlipper(viewFlipper);
+
         return  viewFlipper;
     }
 

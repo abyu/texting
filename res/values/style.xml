@@ -26,8 +26,10 @@
         <item name="android:background">@android:color/white</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginRight">2dp</item>
+        <item name="android:layout_marginRight">3dp</item>
+        <item name="android:textSize">10dp</item>
     </style>
+
     <style name="contact_type_number">
         <item name="android:textColor">@android:color/black</item>
         <item name="android:background">@android:color/white</item>

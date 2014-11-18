@@ -36,6 +36,8 @@ public class ConversationAdaptor extends CursorAdapter implements BackgroundTask
         this.conversationRepository = conversationRepository;
         eventRepository.register(this, Event.SMSReceived);
         eventRepository.register(this, Event.SMSReplied);
+        Log.d("TEXTING:", conversation.getCursorEntity().getCount() + "- Count");
+        Log.d("TEXTING:", conversation.getThreadId() + "- Thread");
     }
 
     @Override

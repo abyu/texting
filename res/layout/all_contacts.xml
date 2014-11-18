@@ -15,7 +15,7 @@
         android:textColor="@android:color/black"
         android:inputType="textFilter"
         android:visibility="visible"
-        android:hint="search"
+        android:hint="@string/contact_search_hint"
         />
 
     <ListView
@@ -24,6 +24,8 @@
         android:layout_height="wrap_content"
         android:textFilterEnabled="true"
         android:animateLayoutChanges="true"
-        android:layout_below="@id/search_contact">
+        android:layout_below="@id/search_contact"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
         </ListView>
 </com.skk.texting.customview.CustomRelativeLayout>

@@ -3,4 +3,5 @@
     <string name="app_name">Texts</string>
     <string name="version">1.2.1</string>
     <string name="send">send</string>
+    <string name="contact_search_hint">search</string>
 </resources>

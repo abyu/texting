@@ -40,7 +40,7 @@ public class HeaderWrapper implements View.OnClickListener {
 
         String selection = ContactsContract.CommonDataKinds.Phone.HAS_PHONE_NUMBER + " = " + 1 + " and "+ ContactsContract.CommonDataKinds.Phone.IN_VISIBLE_GROUP + " = " + 1;
         ContentResolver contentResolver = currentView.getContext().getContentResolver();
-        Cursor query = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, selection, null, null);
+        Cursor query = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, selection, null, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " ASC");
 
         ContactsAdaptor contactsAdaptor = new ContactsAdaptor(currentView.getContext(), query);
         contactsList.setAdapter(contactsAdaptor);
