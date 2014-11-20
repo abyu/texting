@@ -18,6 +18,7 @@ import com.skk.texting.R;
 import com.skk.texting.constants.ApplicationConstants;
 import com.skk.texting.constants.TextMessageConstants;
 import com.skk.texting.domain.TextMessage;
+import com.skk.texting.eventdata.EmptyEventData;
 import com.skk.texting.evented.Event;
 import com.skk.texting.evented.EventHandler;
 import com.skk.texting.evented.EventRepository;
@@ -35,6 +36,7 @@ public class TextMessageAdaptor extends CursorAdapter implements EventHandler, B
         this.personFactory = personFactory;
         this.contentResolver = contentResolver;
         eventRepository.register(this, Event.SMSReceived);
+        eventRepository.register(this, Event.ConversationUpdated);
     }
 
     @Override
@@ -49,6 +51,7 @@ public class TextMessageAdaptor extends CursorAdapter implements EventHandler, B
         TextView contactName = (TextView)view.findViewById(R.id.contact_name);
 
         TextMessage textMessage = TextMessage.fromCursor(cursor, personFactory);
+
         contactName.setText(textMessage.getDisplayName());
 
         Drawable drawable = view.getResources().getDrawable(R.drawable.touch_text_view);
@@ -69,6 +72,14 @@ public class TextMessageAdaptor extends CursorAdapter implements EventHandler, B
         }
         taskComplete(); //force reload the cursor, so that the order get reflected.
         return false;
+    }
+
+
+    @HandleEvent(eventType = Event.ConversationUpdated)
+    public boolean handleConversationsUpdated(EmptyEventData eventData) {
+
+        taskComplete();
+        return true;
     }
 
     private boolean conversationExists(String originatingAddress) {

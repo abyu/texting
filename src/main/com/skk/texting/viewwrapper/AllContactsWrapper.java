@@ -84,10 +84,6 @@ public class AllContactsWrapper implements AdapterView.OnItemClickListener {
         View currentView = viewFlipper.getCurrentView();
         ListView listView = (ListView) currentView.findViewById(R.id.listView);
 
-        Cursor cursorEntity = conversation.getCursorEntity();
-        Log.d("TEXTING:", cursorEntity.getCount() + " Count1");
-        Log.d("TEXTING:", conversation.getThreadId() + " Thread1");
-
         ConversationAdaptor conversationAdaptor = new ConversationAdaptor(view.getContext(), conversation, conversationRepository, eventRepository);
         listView.setAdapter(conversationAdaptor);
     }

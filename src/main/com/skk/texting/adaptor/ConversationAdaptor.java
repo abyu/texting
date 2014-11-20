@@ -15,9 +15,11 @@ import com.skk.texting.adaptor.view.ViewType;
 import com.skk.texting.async.AsyncCursorUpdate;
 import com.skk.texting.async.BackgroundTask;
 import com.skk.texting.constants.ApplicationConstants;
+import com.skk.texting.constants.TextMessageConstants;
 import com.skk.texting.domain.Conversation;
 import com.skk.texting.domain.ConversationRepository;
 import com.skk.texting.domain.TextMessage;
+import com.skk.texting.eventdata.EmptyEventData;
 import com.skk.texting.evented.Event;
 import com.skk.texting.evented.EventHandler;
 import com.skk.texting.evented.EventRepository;
@@ -25,19 +27,21 @@ import com.skk.texting.evented.HandleEvent;
 import com.skk.texting.eventdata.IncomingSmsData;
 import com.skk.texting.eventdata.RepliedSms;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class ConversationAdaptor extends CursorAdapter implements BackgroundTask, EventHandler {
 
     private ConversationRepository conversationRepository;
+    private final EventRepository eventRepository;
     private Conversation conversation;
 
     public ConversationAdaptor(Context context, Conversation conversation, ConversationRepository conversationRepository, EventRepository eventRepository) {
         super(context, conversation.getCursorEntity(), false);
         this.conversation = conversation;
         this.conversationRepository = conversationRepository;
+        this.eventRepository = eventRepository;
         eventRepository.register(this, Event.SMSReceived);
         eventRepository.register(this, Event.SMSReplied);
-        Log.d("TEXTING:", conversation.getCursorEntity().getCount() + "- Count");
-        Log.d("TEXTING:", conversation.getThreadId() + "- Thread");
     }
 
     @Override
@@ -76,6 +80,14 @@ public class ConversationAdaptor extends CursorAdapter implements BackgroundTask
         conversation = conversationRepository.loadConversations(conversation.getThreadId());
 
         changeCursor(conversation.getCursorEntity());
+
+        try {
+            eventRepository.raiseEvent(Event.ConversationUpdated, new EmptyEventData());
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -86,8 +98,15 @@ public class ConversationAdaptor extends CursorAdapter implements BackgroundTask
         try {
             do {
                 Thread.sleep(5);
-                conversation = conversationRepository.loadConversations(conversation.getThreadId());
-                newCursor = conversation.getCursorEntity();
+                String threadId = conversation.getThreadId();
+                if(threadId != null) {
+                    conversation = conversationRepository.loadConversations(threadId);
+                    newCursor = conversation.getCursorEntity();
+                }else{
+                    newCursor = conversationRepository.newCursor(conversation);
+                    if(newCursor.moveToNext())
+                        conversation = conversationRepository.loadConversations(newCursor.getString(newCursor.getColumnIndex(TextMessageConstants.THREAD_ID)));
+                }
                 retryCount++;
                 if(retryCount > ApplicationConstants.MAX_RETRY_COUNT) break;
             } while (!(newCursor.getCount() > initialCount));
