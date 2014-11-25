@@ -15,4 +15,7 @@ before_install:
 - unzip build-tools_r19.1-linux.zip
 - mkdir -p $ANDROID_HOME/build-tools
 - mv android-4.4.2 $ANDROID_HOME/build-tools/19.1.0
-- gradle -v
+- sudo rm -r /usr/local/gradle
+- curl -LO http://services.gradle.org/distributions/gradle-2.1-bin.zip
+- unzip -q gradle-2.1-bin.zip
+- sudo mv gradle-2.1 /usr/local/gradle
