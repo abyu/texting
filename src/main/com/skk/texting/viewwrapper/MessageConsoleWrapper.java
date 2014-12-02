@@ -91,15 +91,9 @@ public class MessageConsoleWrapper implements View.OnClickListener {
         public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
             boolean buttonVisible = replyButton.getVisibility() == View.VISIBLE;
             if (replyText.getText().toString().isEmpty()) {
-                if (buttonVisible) {
-                    replyButton.startAnimation(slideOutDown);
-                    replyButton.setVisibility(View.GONE);
-                }
+                replyButton.setEnabled(false);
             } else {
-                if (!buttonVisible) {
-                    replyButton.startAnimation(slideInUp);
-                    replyButton.setVisibility(View.VISIBLE);
-                }
+                replyButton.setEnabled(true);
             }
         }
 

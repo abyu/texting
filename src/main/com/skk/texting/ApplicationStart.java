@@ -16,6 +16,7 @@ import com.skk.texting.viewwrapper.AllContactsWrapper;
 import com.skk.texting.viewwrapper.HeaderWrapper;
 import com.skk.texting.viewwrapper.MessageConsoleWrapper;
 import com.skk.texting.viewwrapper.TextMessagesView;
+import com.sony.smallapp.SmallAppWindow;
 
 
 public class ApplicationStart extends RoboSmallApplication {
@@ -42,7 +43,18 @@ public class ApplicationStart extends RoboSmallApplication {
         itemClickListener.setViewFlipper(viewFlipper());
 
         setHeader();
+        setMinimumDimensions();
+
         new TextMessagesView(messagesListView, textMessageAdaptor).setItemClickListener(itemClickListener);
+    }
+
+    private void setMinimumDimensions() {
+        SmallAppWindow.Attributes attributes = getWindow().getAttributes();
+
+        attributes.height = getResources().getDimensionPixelOffset(R.dimen.width);
+        attributes.width = getResources().getDimensionPixelOffset(R.dimen.height);
+
+        getWindow().setAttributes(attributes);
     }
 
     private void setHeader() {
