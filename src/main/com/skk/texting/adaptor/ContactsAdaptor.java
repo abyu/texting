@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.FilterQueryProvider;
 import android.widget.TextView;
-import com.skk.texting.R;
+import com.skk.ptexting.R;
 import com.skk.texting.domain.Person;
 
 public class ContactsAdaptor extends CursorAdapter {

@@ -1,4 +1,4 @@
-package com.skk.texting;
+package com.skk.ptexting;
 
 import android.database.Cursor;
 import android.net.Uri;

@@ -6,6 +6,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ViewFlipper;
 import com.google.inject.Inject;
+import com.skk.ptexting.R;
 import com.skk.texting.*;
 import com.skk.texting.adaptor.ConversationAdaptor;
 import com.skk.texting.constants.TextMessageConstants;

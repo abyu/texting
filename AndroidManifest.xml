@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.skk.texting" android:versionCode="14" android:versionName="@string/version">
+          package="com.skk.ptexting" android:versionCode="14" android:versionName="@string/version">
     <uses-sdk android:minSdkVersion="16"/>
     <uses-permission android:name="com.sony.smallapp.permission.SMALLAPP" />
     <uses-permission android:name="android.permission.READ_SMS" />
@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.WRITE_SMS"/>
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
-    <application android:icon="@drawable/m_icon64_s" android:label="@string/app_name" android:allowBackup="false" android:name=".TextingApplication">
+    <application android:icon="@drawable/m_icon64_s" android:label="@string/app_name" android:allowBackup="false" android:name="com.skk.texting.TextingApplication">
         <uses-library android:name="com.sony.smallapp.framework"/>
         <service android:name=".ApplicationStart" android:exported="true"
                  android:label="@string/app_name" >
@@ -18,7 +18,7 @@
                 <category android:name="com.sony.smallapp.intent.category.LAUNCHER" />
             </intent-filter>
          </service>
-        <receiver android:name=".listener.IncomingSmsListener" >
+        <receiver android:name="com.skk.texting.listener.IncomingSmsListener" >
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>

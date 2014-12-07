@@ -8,7 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import com.google.inject.Inject;
-import com.skk.texting.R;
+import com.skk.ptexting.R;
 import com.skk.texting.TextingApplication;
 import com.skk.texting.adaptor.ContactsAdaptor;
 import com.skk.texting.adaptor.ConversationAdaptor;

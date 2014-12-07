@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import com.skk.ptexting.R;
 import com.skk.texting.*;
 import com.skk.texting.adaptor.view.ViewHolder;
 import com.skk.texting.adaptor.view.ViewType;

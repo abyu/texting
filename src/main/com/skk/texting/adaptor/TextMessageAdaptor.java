@@ -14,7 +14,7 @@ import android.widget.CursorAdapter;
 import android.widget.TextView;
 import com.skk.texting.async.AsyncCursorUpdate;
 import com.skk.texting.async.BackgroundTask;
-import com.skk.texting.R;
+import com.skk.ptexting.R;
 import com.skk.texting.constants.ApplicationConstants;
 import com.skk.texting.constants.TextMessageConstants;
 import com.skk.texting.domain.TextMessage;

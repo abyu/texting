@@ -8,7 +8,7 @@ import android.widget.EditText;
 import com.google.inject.Inject;
 import com.skk.texting.evented.Event;
 import com.skk.texting.evented.EventRepository;
-import com.skk.texting.R;
+import com.skk.ptexting.R;
 import com.skk.texting.TextingApplication;
 import com.skk.texting.domain.Conversation;
 import com.skk.texting.domain.ConversationRepository;
