@@ -66,8 +66,6 @@ public class ApplicationStart extends RoboSmallApplication {
         headerWrapper.setViewFlipper((ViewFlipper) findViewById(R.id.viewFlipper));
     }
 
-
-
     private ViewFlipper viewFlipper(){
         final ViewFlipper viewFlipper = (ViewFlipper) findViewById(R.id.viewFlipper);
         LayoutInflater layoutInflater = LayoutInflater.from(this);

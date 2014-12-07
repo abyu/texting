@@ -2,4 +2,5 @@
 <resources>
     <dimen name="width">200dp</dimen>
     <dimen name="height">300dp</dimen>
+    <dimen name="contact_container_left_padding">2dp</dimen>
 </resources>
