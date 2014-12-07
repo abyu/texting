@@ -3,8 +3,6 @@ package com.skk.texting.viewwrapper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import com.google.inject.Inject;
@@ -36,7 +34,7 @@ public class MessageConsoleWrapper implements View.OnClickListener {
         replyText = (EditText) messageConsole.findViewById(R.id.reply_text);
 
         replyButton.setOnClickListener(new ReplyButtonEventHandler());
-        replyText.addTextChangedListener(new ReplyTextEventHandler(messageConsole));
+        replyText.addTextChangedListener(new ReplyTextEventHandler());
 
     }
 
@@ -74,12 +72,7 @@ public class MessageConsoleWrapper implements View.OnClickListener {
 
     private class ReplyTextEventHandler implements TextWatcher {
 
-        private final Animation slideInUp;
-        private final Animation slideOutDown;
-
-        public ReplyTextEventHandler(View messageConsole) {
-            slideInUp = AnimationUtils.loadAnimation(messageConsole.getContext(), R.anim.slide_in_up);
-            slideOutDown = AnimationUtils.loadAnimation(messageConsole.getContext(), R.anim.slide_out_down);
+        public ReplyTextEventHandler() {
         }
 
         @Override
@@ -89,7 +82,6 @@ public class MessageConsoleWrapper implements View.OnClickListener {
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-            boolean buttonVisible = replyButton.getVisibility() == View.VISIBLE;
             if (replyText.getText().toString().isEmpty()) {
                 replyButton.setEnabled(false);
             } else {

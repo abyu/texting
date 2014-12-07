@@ -79,6 +79,7 @@ public class AllContactsWrapper implements AdapterView.OnItemClickListener {
         TextingApplication applicationContext = (TextingApplication) view.getContext().getApplicationContext();
         applicationContext.setCurrentConversation(conversation);
 
+        contactSearch.setText("");
         viewFlipper.setDisplayedChild(1);
 
         View currentView = viewFlipper.getCurrentView();
